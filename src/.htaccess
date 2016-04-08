@@ -1,0 +1,22 @@
+# Activates URL rewriting (like example.com/folder/file)
+RewriteEngine On
+
+# Prevent people from looking directly into folders
+Options -Indexes
+
+# Only continue if the requested filename is not a directory
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Only continue if the requested filename is not a symbolic link
+RewriteCond %{REQUEST_FILENAME} !-l
+
+# Only continue if the requested filename is not a regular file that exists
+RewriteCond %{REQUEST_FILENAME} !-f
+
+# Don't allow direct access to helper files
+RewriteRule \.plugin\.php$ - [F,L,NC]
+RewriteRule \.model\.php$ - [F,L,NC]
+RewriteRule \.controller\.php$ - [F,L,NC]
+
+# Hide the .php file extension
+#RewriteRule ^([^/.]+)$ $1.php [NC,L]
