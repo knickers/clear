@@ -19,7 +19,7 @@ class Clear {
 	}
 	
 	public static function template($file, $return=false) {
-		$file = rtrim(trim(trim($file), '/'), '.php');
+		$file = self::rcut(trim(trim($file), '/'), '.php');
 		if (!$file) {
 			return false;
 		}
@@ -29,7 +29,27 @@ class Clear {
 			require BASEDIR . "/$file.php";
 		}
 	}
+	
+	public static function cut($string, $cutString) {
+		return self::lcut(self::rcut($string, $cutString), $cutString);
+	}
+	
+	public static function lcut($string, $cutString) {
+		$len = strlen($cutString);
+		if (substr($string, 0, $len) === $cutString) {
+			return substr($string, $len);
+		}
+	}
+	
+	public static function rcut($string, $cutString) {
+		$len = strlen($cutString);
+		if (substr($string, -$len) === $cutString) {
+			return substr($string, 0, -$len);
+		}
+	}
 }
+
+DEFINE('RELURL', Clear::lcut(CURDIR, BASEDIR));
 
 //Clear::require(BASEDIR . '/*.plugin.php');
 //Clear::require(CURDIR . '/*.model.php');
