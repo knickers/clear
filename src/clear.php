@@ -1,10 +1,27 @@
 <?php
 
+function lcut($string, $cutString) {
+	$len = strlen($cutString);
+	if (substr($string, 0, $len) === $cutString) {
+		return substr($string, $len);
+	}
+}
+function rcut($string, $cutString) {
+	$len = strlen($cutString);
+	if (substr($string, -$len) === $cutString) {
+		return substr($string, 0, -$len);
+	}
+}
+function cut($string, $cutString) {
+	return lcut(rcut($string, $cutString), $cutString);
+}
+
 DEFINE('CURFILE', basename($_SERVER['PHP_SELF']));
 DEFINE('CURFILENAME', basename($_SERVER['PHP_SELF'], '.php'));
 DEFINE('CURDIR', getcwd()); // Current Working Directory
 DEFINE('BASEDIR', __DIR__); // Directory of THIS file (clear.php)
 DEFINE('BASEURL', 'http' . (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? 's' : '') . '://' . $_SERVER['HTTP_HOST']);
+DEFINE('RELURL', lcut(CURDIR, BASEDIR));
 
 class Clear {
 	public static function require($fileregex, $once=false) {
@@ -30,26 +47,7 @@ class Clear {
 		}
 	}
 	
-	public static function cut($string, $cutString) {
-		return self::lcut(self::rcut($string, $cutString), $cutString);
-	}
-	
-	public static function lcut($string, $cutString) {
-		$len = strlen($cutString);
-		if (substr($string, 0, $len) === $cutString) {
-			return substr($string, $len);
-		}
-	}
-	
-	public static function rcut($string, $cutString) {
-		$len = strlen($cutString);
-		if (substr($string, -$len) === $cutString) {
-			return substr($string, 0, -$len);
-		}
-	}
 }
-
-DEFINE('RELURL', Clear::lcut(CURDIR, BASEDIR));
 
 //Clear::require(BASEDIR . '/*.plugin.php');
 //Clear::require(CURDIR . '/*.model.php');
