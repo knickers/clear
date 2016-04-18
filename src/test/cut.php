@@ -1,20 +1,22 @@
 <?php
 require_once '../clear.php';
 
-$echo = "%s: '%s' - '%s' = '%s' : %s<br>";
-
+$echo = "'%s' - '%s' = '%s' : %s<br>";
 $cut = '.php';
 $yes = 'index';
+
+echo 'rcut:<br>';
+
 $rcut = [
 	'index', 'index.php',
 ];
 foreach($rcut as $str) {
 	$got = rcut($str, $cut);
 	$ok = $got == $yes ? 'pass' : 'fail';
-	echo sprintf($echo, 'rcut', $str, $cut, $got, $ok);
+	echo sprintf($echo, $str, $cut, $got, $ok);
 }
 
-echo '<hr>';
+echo '<hr>lcut:<br>';
 
 $cut = 'home/';
 $lcut = [
@@ -23,10 +25,10 @@ $lcut = [
 foreach($lcut as $str) {
 	$got = lcut($str, $cut);
 	$ok = $got == $yes ? 'pass' : 'fail';
-	echo sprintf($echo, 'lcut', $str, $cut, $got, $ok);
+	echo sprintf($echo, $str, $cut, $got, $ok);
 }
 
-echo '<hr>';
+echo '<hr>cut:<br>';
 
 $cut = 'hello';
 $lcut = [
@@ -35,5 +37,5 @@ $lcut = [
 foreach($lcut as $str) {
 	$got = cut($str, $cut);
 	$ok = $got == $yes ? 'pass' : 'fail';
-	echo sprintf($echo, 'cut', $str, $cut, $got, $ok);
+	echo sprintf($echo, $str, $cut, $got, $ok);
 }
