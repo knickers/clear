@@ -25,3 +25,15 @@ foreach($lcut as $str) {
 	$ok = $got == $yes ? 'pass' : 'fail';
 	echo sprintf($echo, 'lcut', $str, $cut, $got, $ok);
 }
+
+echo '<hr>';
+
+$cut = 'hello';
+$lcut = [
+	'index', 'helloindex', 'indexhello', 'helloindexhello',
+];
+foreach($lcut as $str) {
+	$got = cut($str, $cut);
+	$ok = $got == $yes ? 'pass' : 'fail';
+	echo sprintf($echo, 'cut', $str, $cut, $got, $ok);
+}
