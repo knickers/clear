@@ -4,6 +4,7 @@
 <h1>Choose a test to run:</h1>
 
 <ul>
+	<li><a href="/test/cut.php">Cut</a></li>
 	<li><a href="/test/template.php">Clear::template</a></li>
 </ul>
 
