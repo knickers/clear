@@ -5,12 +5,14 @@ function lcut($string, $cutString) {
 	if (substr($string, 0, $len) === $cutString) {
 		return substr($string, $len);
 	}
+	return $string;
 }
 function rcut($string, $cutString) {
 	$len = strlen($cutString);
 	if (substr($string, -$len) === $cutString) {
 		return substr($string, 0, -$len);
 	}
+	return $string;
 }
 function cut($string, $cutString) {
 	return lcut(rcut($string, $cutString), $cutString);
@@ -36,7 +38,7 @@ class Clear {
 	}
 	
 	public static function template($file, $return=false) {
-		$file = self::rcut(trim(trim($file), '/'), '.php');
+		$file = rcut(trim(trim($file), '/'), '.php');
 		if (!$file) {
 			return false;
 		}
