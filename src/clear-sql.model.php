@@ -6,6 +6,17 @@ class ClearModel {
 	static protected $primaryKey = 'id';
 	static protected $queryOptionCount;
 	
+	public static function init() {
+		if (!is_null(static::$db)) {
+			return false;
+		}
+		// TODO These need to come from a config
+		static::$db = new PDO('mysql:dbname=clear;host=db;port=3306', 'root', 'qwerty');
+		static::$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		static::$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+		static::$db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+	}
+	
 	/*
 	 * 1. Keys can be associative array pairs
 	 * ex. $data = array(
@@ -34,13 +45,13 @@ class ClearModel {
 	 * )
 	 */
 	public static function buildOptions($data, &$vars, $seperator) {
-		if (is_null(self::$queryOptionCount)) {
-			self::$queryOptionCount = 0;
+		if (is_null(static::$queryOptionCount)) {
+			static::$queryOptionCount = 0;
 		}
 		$sql = '';
-		$i = self::$queryOptionCount;
+		$i = static::$queryOptionCount;
 		foreach ($data as $key => $val) {
-			if ($i > self::$queryOptionCount) {
+			if ($i > static::$queryOptionCount) {
 				$sql .= $seperator;
 			}
 			$i += 1;
@@ -77,7 +88,7 @@ class ClearModel {
 			}
 			$sql .= $key;
 		}
-		self::$queryOptionCount = $i;
+		static::$queryOptionCount = $i;
 		return $sql;
 	}
 	
@@ -113,11 +124,7 @@ class ClearModel {
 	 * @return an executed statment, ready for ->fetch() or ->fetchAll()
 	 */
 	public static function query($sql, $vars) {
-		$db = new PDO('mysql:dbname=clear;host=db;port=3306', 'root', 'qwerty');
-		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-		
-		$stmt = $db->prepare($sql);
+		$stmt = static::$db->prepare($sql);
 		$stmt->execute($vars);
 		
 		return $stmt;
