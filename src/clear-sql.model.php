@@ -1,6 +1,7 @@
 <?php
 
 class ClearModel {
+	static protected $db;
 	static protected $table;
 	static protected $primaryKey = 'id';
 	static protected $queryOptionCount;
@@ -112,7 +113,9 @@ class ClearModel {
 	 * @return an executed statment, ready for ->fetch() or ->fetchAll()
 	 */
 	public static function query($sql, $vars) {
-		$db = DatabaseFactory::getFactory()->getConnection();
+		$db = new PDO('mysql:dbname=clear;host=db;port=3306', 'root', 'qwerty');
+		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 		
 		$stmt = $db->prepare($sql);
 		$stmt->execute($vars);
