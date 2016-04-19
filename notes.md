@@ -12,3 +12,7 @@
 - Load a "model" if is has the name `/current/directory/*.model.php`
 - Load a "controller" if it has the name `/current/directory/*.controller.php`
 - Files that match `*.plugin.php`, `*.model.php` and `*.controller.php` should be disallowed
+
+Enable mysql general log:
+> SET GLOBAL general_log = 'ON';
+> SET GLOBAL general_log_file = '/var/log/mysql/all.log';
