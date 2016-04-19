@@ -49,11 +49,40 @@ class Clear {
 		}
 	}
 	
+	public static function model($file, $return=false) {
+		$file = rcut(rcut(trim(trim($file), '/'), '.php'), '.model');
+		if (!$file) {
+			return false;
+		}
+		if ($return) {
+			return BASEDIR . "/$file.model.php";
+		} else {
+			require_once BASEDIR . "/$file.model.php";
+		}
+	}
+	
+	public static function get($name, $default='') {
+		return isset($_GET[$name]) ? $_GET[$name] : $default;
+	}
+	
+	/**
+	 * Redirect helper
+	 *
+	 * @param $URL string relative URL, '/' = home
+	 * @param $code int, HTML status code
+	 *   301 = Moved permanently
+	 *   302 = Found
+	 *   303 = See other (for POST redirect GET)
+	 *   304 = Not modified
+	 *   307 = Temporary redirect
+	 *
+	 * @return none die();
+	 */
+	public static function redirect($URL, $code=303) {
+		header('location: '.BASEURL.$URL, true, $code);
+		die();
+	}
 }
-
-//Clear::require(BASEDIR . '/*.plugin.php');
-//Clear::require(CURDIR . '/*.model.php');
-//Clear::require(CURDIR . '/*.controller.php');
 
 // Include a crontroller for this page if available
 if (file_exists(CURDIR . '/' . CURFILENAME . '.controller.php')) {
