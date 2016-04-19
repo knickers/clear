@@ -138,12 +138,11 @@ class ClearModel {
 	 * @return object
 	 */
 	public static function get($id, $keys='*') {
-		return self::query(sprintf('SELECT :keys FROM %s WHERE %s = :id',
+		return self::query(sprintf("SELECT $keys FROM %s WHERE %s = :id",
 			static::$table,
-			static::$primaryKey,
+			static::$primaryKey
 		), array(
 			':id' => $id,
-			':keys' => $keys,
 		))->fetch();
 	}
 	
@@ -156,9 +155,9 @@ class ClearModel {
 	 * @return array of objects
 	 */
 	public static function find($search=array(), $options=array(), $keys='*') {
-		$vars = array(':k3y5' => $keys);
+		$vars = array();
 		
-		$sql = 'SELECT :k3y5 FROM ' . static::$table;
+		$sql = "SELECT $keys FROM " . static::$table;
 		$sql .= self::buildQuery($search, $options, $vars);
 		
 		return self::query($sql, $vars)->fetchAll();;
@@ -176,9 +175,9 @@ class ClearModel {
 		if (!isset($options['LIMIT 1'])) {
 			$options[] = 'LIMIT 1';
 		}
-		$vars = array(':k3y5' => $keys);
+		$vars = array();
 		
-		$sql = 'SELECT :k3y5 FROM ' . static::$table;
+		$sql = "SELECT $keys FROM " . static::$table;
 		$sql .= self::buildQuery($search, $options, $vars);
 		
 		return self::query($sql, $vars)->fetch();;
@@ -209,9 +208,9 @@ class ClearModel {
 	 * @return float, sum of matching rows
 	 */
 	public static function sum($column, $search=array(), $options=array()) {
-		$vars = array(':c0Lumn' => $column);
+		$vars = array();
 		
-		$sql = 'SELECT SUM(:c0Lumn) AS sum FROM ' . static::$table;
+		$sql = "SELECT $column AS sum FROM " . static::$table;
 		$sql .= self::buildQuery($search, $options, $vars);
 		
 		return (float) self::query($sql, $vars)->fetch()->sum;
