@@ -216,4 +216,31 @@ class ClearModel {
 		
 		return (float) self::query($sql, $vars)->fetch()->sum;
 	}
+	
+	/**
+	 * Insert a new row into the table
+	 *
+	 * @param $data : 
+	 * @param $ignore: 
+	 * @return int, number of matching rows
+	 */
+	public static function insert($data, $ignore=false) {
+		$i = 0;
+		$sql = 'INSERT '.($ignore ? 'IGNORE' : '').' INTO '.static::$table.' (';
+		$vals = ') VALUES (';
+		$vars = array();
+		foreach($data as $key => $val) {
+			if ($i) {
+				$sql .= ', ';
+				$vals .= ', ';
+			}
+			$i += 1;
+			$sql .= $key;
+			$vals .= ":$key";
+			$vars[":$key"] = $val;
+		}
+		
+		$stmt = self::query($sql.$vals.')', $vars);
+		return static::$db->lastInsertId();
+	}
 }
