@@ -12,7 +12,6 @@
 	</div>
 </form>
 
-<pre><?= var_export($todos) ?></pre>
 <table class="table">
 	<thead>
 		<tr>
