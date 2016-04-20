@@ -24,10 +24,26 @@
 	<tbody>
 		<?php foreach ($todos as $i => $todo): ?>
 			<tr>
-				<td><?= $todo->due ?></td>
+				<td><?= date('Y-m-d', $todo->due) ?></td>
 				<td><?= $todo->name ?></td>
 				<td><?= $todo->notes ?></td>
-				<td><a href="<?= RELURL ?>/done.php?id=<?= $todo->id ?>" title="Mark as Complete">✓</a></td>
+				<td class="text-right">
+					<!--
+					<form action="<?= RELURL ?>/done.php" method="POST">
+						<input type="hidden" name="id" value="<?= $todo->id ?>">
+						<div type="submit">
+							<span class="glyphicon glyphicon-ok"></span>
+						</div>
+					</form>
+					-->
+					<a href="<?= RELURL ?>/done.php?id=<?= $todo->id ?>" title="Mark as Complete">
+						<span class="glyphicon glyphicon-ok"></span>
+					</a>
+					&nbsp;
+					<a href="<?= RELURL ?>/delete.php?id=<?= $todo->id ?>" title="Delete">
+						<span class="glyphicon glyphicon-trash"></span>
+					</a>
+				</td>
 			</tr>
 		<?php endforeach ?>
 	</tbody>
