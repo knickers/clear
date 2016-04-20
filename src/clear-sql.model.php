@@ -242,4 +242,27 @@ class ClearModel {
 		$stmt = self::query($sql.$vals.')', $vars);
 		return static::$db->lastInsertId();
 	}
+	
+	/**
+	 * 9 lines
+	 *
+	 * @param 
+	 * @return float, sum of matching rows
+	 */
+	public static function delete($id) {
+		$stmt = static::$db->prepare(sprintf('DELETE FROM %s WHERE %s = :id',
+			static::$table,
+			static::$primaryKey
+		));
+		return $stmt->execute(array(':id' => $id)) ? $stmt->rowCount() : false;
+	}
+	
+	/**
+	 * Delete a row from the table
+	 *
+	 * @param $id, table primary key
+	 * @return float, sum of matching rows
+	 */
+	public static function temp() {
+	}
 }

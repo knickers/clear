@@ -4,8 +4,8 @@ Clear::model('example/todo/todo');
 
 $model = new TodoModel();
 
-$model->insert(array(
-	'name' => $_POST['name'],
-));
+if (isset($_GET['id'])) {
+	$model->delete($_GET['id']);
+}
 
 Clear::redirect('/example/todo/');

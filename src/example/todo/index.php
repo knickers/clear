@@ -24,7 +24,7 @@
 	<tbody>
 		<?php foreach ($todos as $i => $todo): ?>
 			<tr>
-				<td><?= date('Y-m-d', $todo->due) ?></td>
+				<td><?= $todo->date ?></td>
 				<td><?= $todo->name ?></td>
 				<td><?= $todo->notes ?></td>
 				<td class="text-right">
