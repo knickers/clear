@@ -131,11 +131,35 @@ class ClearModel {
 	}
 	
 	/**
+	 * Set values of a row by primary key
+	 *
+	 * @param $data, values to be updated
+	 * @param $id, table primary key
+	 * @return Statement
+	 */
+	public static function set($data, $options) {
+		if (!is_array($options)) {
+			$options = array(static::$primaryKey => $options);
+		}
+		
+		$vars = array();
+		
+		$sql = 'UPDATE ' . static::$table . ' SET ';
+		$sql .= self::buildOptions($data, $vars, ', ');
+		$sql .= ' WHERE ' . self::buildOptions($options, $vars, ' AND ');
+		
+		$stmt = static::$db->prepare($sql);
+		$stmt->execute($vars);
+		
+		return $stmt;
+	}
+	
+	/**
 	 * Get a row by primary key
 	 *
 	 * @param id  : the table's primary key id
 	 * @param keys: optional string of comma seperated columns to return
-	 * @return object
+	 * @return table row object
 	 */
 	public static function get($id, $keys='*') {
 		return self::query(sprintf("SELECT $keys FROM %s WHERE %s = :id",
@@ -244,7 +268,7 @@ class ClearModel {
 	}
 	
 	/**
-	 * 9 lines
+	 * Delete a row from the table
 	 *
 	 * @param 
 	 * @return float, sum of matching rows
@@ -258,7 +282,7 @@ class ClearModel {
 	}
 	
 	/**
-	 * Delete a row from the table
+	 * 9 lines
 	 *
 	 * @param $id, table primary key
 	 * @return float, sum of matching rows
