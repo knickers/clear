@@ -28,14 +28,6 @@
 				<td><?= $todo->name ?></td>
 				<td><?= $todo->notes ?></td>
 				<td class="text-right">
-					<!--
-					<form action="<?= RELURL ?>/done.php" method="POST">
-						<input type="hidden" name="id" value="<?= $todo->id ?>">
-						<div type="submit">
-							<span class="glyphicon glyphicon-ok"></span>
-						</div>
-					</form>
-					-->
 					<a href="<?= RELURL ?>/done.php?id=<?= $todo->id ?>" title="Mark as Complete">
 						<span class="glyphicon glyphicon-ok"></span>
 					</a>
@@ -49,7 +41,8 @@
 	</tbody>
 </table>
 
-<h2>Done</h2>
+<br>
+
 <table class="table">
 	<thead>
 		<tr>
