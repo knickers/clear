@@ -49,4 +49,30 @@
 	</tbody>
 </table>
 
+<h2>Done</h2>
+<table class="table">
+	<thead>
+		<tr>
+			<th>Done</th>
+			<th>Name</th>
+			<th>Notes</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<?php foreach ($done as $i => $todo): ?>
+			<tr>
+				<td><?= $todo->date ?></td>
+				<td><?= $todo->name ?></td>
+				<td><?= $todo->notes ?></td>
+				<td class="text-right">
+					<a href="<?= RELURL ?>/delete.php?id=<?= $todo->id ?>" title="Delete">
+						<span class="glyphicon glyphicon-trash"></span>
+					</a>
+				</td>
+			</tr>
+		<?php endforeach ?>
+	</tbody>
+</table>
+
 <?php Clear::template('example/todo/_footer') ?>
