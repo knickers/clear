@@ -59,6 +59,9 @@
 				<td><?= $todo->name ?></td>
 				<td><?= $todo->notes ?></td>
 				<td class="text-right">
+					<a href="<?= RELURL ?>/undone.php?id=<?= $todo->id ?>" title="Mark as Incomplete">
+						<span class="glyphicon glyphicon-remove"></span>
+					</a>
 					<a href="<?= RELURL ?>/delete.php?id=<?= $todo->id ?>" title="Delete">
 						<span class="glyphicon glyphicon-trash"></span>
 					</a>
