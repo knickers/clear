@@ -5,4 +5,4 @@
 	</head>
 	<body>
 		<div class="container">
-			<pre>URL: <?= BASEURL ?> - Base: <?= BASEDIR ?> - Current: <?= CURDIR ?> - File: <?= CURFILE ?></pre>
+			<?= Clear::template('_globals') ?>
