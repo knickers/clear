@@ -4,11 +4,18 @@
 <h1>TODO Items</h1>
 
 <form action="<?= RELURL ?>/create.php" method="POST" class="row">
-	<div class="col-sm-10">
-		<input type="text" name="name" class="form-control"/>
+	<div class="col-sm-6">
+		<input type="text" name="name" class="form-control" placeholder="Name"/>
+		<br>
+		<input type="text" name="date" class="form-control" placeholder="Due Date" onfocus="this.type = 'datetimeLocal'" onblur="this.type = 'text'"/>
+		<br>
 	</div>
-	<div class="col-sm-2">
-		<button type="submit" class="btn btn-block btn-default">Add</button>
+	<div class="col-sm-6">
+		<textarea name="notes" rows="4" class="form-control" placeholder="Notes"></textarea>
+	</div>
+	<div class="col-sm-12 text-right">
+		<br class="visible-xs">
+		<button type="submit" class="btn btn-default">Add</button>
 	</div>
 </form>
 
