@@ -29,6 +29,11 @@
 		</tr>
 	</thead>
 	<tbody>
+		<?php if (!count($todos)): ?>
+			<tr>
+				<td colspan="4" class="text-center">Everything is done!</td>
+			</tr>
+		<?php endif ?>
 		<?php foreach ($todos as $i => $todo): ?>
 			<tr>
 				<td><?= $todo->date ?></td>
@@ -45,12 +50,13 @@
 				</td>
 			</tr>
 		<?php endforeach ?>
+		<tr>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>
 	</tbody>
-</table>
-
-<br>
-
-<table class="table">
 	<thead>
 		<tr>
 			<th>Done</th>
@@ -60,6 +66,11 @@
 		</tr>
 	</thead>
 	<tbody>
+		<?php if (!count($done)): ?>
+			<tr>
+				<td colspan="4" class="text-center">Nothing yet complete</td>
+			</tr>
+		<?php endif ?>
 		<?php foreach ($done as $i => $todo): ?>
 			<tr>
 				<td><?= $todo->date ?></td>
@@ -67,7 +78,7 @@
 				<td><?= $todo->notes ?></td>
 				<td class="text-right">
 					<a href="<?= RELURL ?>/undone.php?id=<?= $todo->id ?>" title="Mark as Incomplete">
-						<span class="glyphicon glyphicon-remove"></span>
+						<span class="glyphicon glyphicon-arrow-up"></span>
 					</a>
 					<a href="<?= RELURL ?>/delete.php?id=<?= $todo->id ?>" title="Delete">
 						<span class="glyphicon glyphicon-trash"></span>
