@@ -123,7 +123,7 @@ class ClearModel {
 	 * @param $vars: array, prepared sql replacment variables
 	 * @return an executed statment, ready for ->fetch() or ->fetchAll()
 	 */
-	public static function query($sql, $vars) {
+	public static function query($sql, $vars=array()) {
 		$stmt = static::$db->prepare($sql);
 		$stmt->execute($vars);
 		
