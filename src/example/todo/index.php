@@ -1,5 +1,5 @@
 <?php require_once '../../clear.php' ?>
-<?php Clear::template('example/todo/_header') ?>
+<?php Clear::template('_header') ?>
 
 <h1>TODO Items</h1>
 
@@ -89,4 +89,4 @@
 	</tbody>
 </table>
 
-<?php Clear::template('example/todo/_footer') ?>
+<?php Clear::template('_footer') ?>
