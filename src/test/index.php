@@ -8,13 +8,14 @@
 	<li><a href="/test/template.php">Clear::template</a></li>
 </ul>
 
-<h1>MySQL Debuging</h1>
+<br>
+<h2>MySQL Debuging</h2>
 
 <form action="" method="POST">
-	<button <?= $debug ? '' : 'type="submit"' ?> type="submit" name="debug" value="on" class="<?= $debug ? 'active' : '' ?> btn btn-default">
+	<button <?= $debug ? '' : 'type="submit"' ?> name="debug" value="on" class="<?= $debug ? 'active' : '' ?> btn btn-default">
 		Enable
 	</button>
-	<button <?= $debug ? 'type="submit"' : '' ?> type="submit" name="debug" value="off" class="<?= $debug ? '' : 'active' ?> btn btn-default">
+	<button <?= $debug ? 'type="submit"' : '' ?> name="debug" value="off" class="<?= $debug ? '' : 'active' ?> btn btn-default">
 		Disable
 	</button>
 </form>
