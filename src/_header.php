@@ -5,4 +5,13 @@
 	</head>
 	<body>
 		<div class="container">
-			<?= Clear::template('_globals') ?>
+<?php if (!isset($_GET['globals'])) return ?>
+<pre>
+BASEURL : <?= BASEURL ?>
+
+BASEDIR : <?= BASEDIR ?>
+
+CURDIR  : <?= CURDIR ?>
+
+CURFILE : <?= CURFILE ?>
+</pre>
