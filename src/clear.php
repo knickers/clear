@@ -26,6 +26,10 @@ DEFINE('BASEURL', 'http' . (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on
 DEFINE('RELURL', lcut(CURDIR, BASEDIR));
 
 class Clear {
+	// One-line ascii art : http://www.ascii-code.com/ascii-art/one-line.php
+	const NOTSET              = '(^_^) [o_o] (^.^) (".") ($.$)'; // faces
+	const PARAM_REQUIRED      = '_.~"(_.~"(_.~"(_.~"(_.~"(_';    // waves
+	const PARAM_ALLOWED_EMPTY = '_,-`"`-._,-`"`-._,-`"`-._';     // waves
 	public static function require($fileregex, $once=false) {
 		$files = glob($fileregex);
 		foreach($files as $file) {
