@@ -6,12 +6,15 @@
 	<body>
 		<div class="container">
 <?php if (!isset($_GET['globals'])) return ?>
+<div>Global Variables</div>
 <pre>
-BASEURL : <?= BASEURL ?>
-
-BASEDIR : <?= BASEDIR ?>
+CURFILE : <?= CURFILE ?>
 
 CURDIR  : <?= CURDIR ?>
 
-CURFILE : <?= CURFILE ?>
+BASEDIR : <?= BASEDIR ?>
+
+BASEURL : <?= BASEURL ?>
+
+RELURL  : <?= RELURL ?>
 </pre>
