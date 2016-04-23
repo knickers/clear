@@ -7,7 +7,7 @@
 	<div class="col-sm-6">
 		<input type="text" name="name" class="form-control" placeholder="Name"/>
 		<br>
-		<input type="text" name="date" class="form-control" placeholder="Due Date" onfocus="this.type = 'datetimeLocal'" onblur="this.type = 'text'"/>
+		<input type="text" name="date" class="form-control" placeholder="Due Date" onfocus="this.type = 'date'" onblur="this.type = 'text'"/>
 		<br>
 	</div>
 	<div class="col-sm-6">
@@ -22,10 +22,10 @@
 <table class="table">
 	<thead>
 		<tr>
-			<th>Due</th>
-			<th>Name</th>
-			<th>Notes</th>
-			<th></th>
+			<th style="width: 15%;">Due</th>
+			<th style="width: 35%;">Name</th>
+			<th style="width: 40%;">Notes</th>
+			<th style="width: 10%;"></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -35,19 +35,14 @@
 			</tr>
 		<?php endif ?>
 		<?php foreach ($todos as $i => $todo): ?>
+			<?php $d = explode(' ', $todo->date)[0] ?>
 			<form action="<?= RELURL ?>/update.php" method="POST">
 				<input type="hidden" name="id" value="<?= $todo->id ?>"/>
 				<tr>
-					<td class="toggle-view" style="width: 20%;">
-						<?= $todo->date ?>
-					</td>
-					<td class="toggle-view" style="width: 30%;">
-						<?= $todo->name ?>
-					</td>
-					<td class="toggle-view" style="width: 40%;">
-						<?= $todo->notes ?>
-					</td>
-					<td class="toggle-view text-right" style="width: 10%;">
+					<td class="toggle-view"><?= $d ?></td>
+					<td class="toggle-view"><?= $todo->name ?></td>
+					<td class="toggle-view"><?= $todo->notes ?></td>
+					<td class="toggle-view text-right">
 						<a href="#" title="Edit" class="toggle-edit-btn">
 							<span class="glyphicon glyphicon-pencil"></span>
 						</a>
@@ -61,7 +56,7 @@
 						</a>
 					</td>
 					<td class="toggle-edit hide">
-						<input type="datetime-local" name="date" value="<?= str_replace(' ', 'T', $todo->date) ?>" class="form-control"/>
+						<input type="date" name="date" value="<?= $d ?>" class="form-control"/>
 					</td>
 					<td class="toggle-edit hide">
 						<input type="text" name="name" value="<?= $todo->name ?>" class="form-control" placeholder="Name"/>
@@ -98,7 +93,7 @@
 		<?php endif ?>
 		<?php foreach ($done as $i => $todo): ?>
 			<tr>
-				<td><?= $todo->date ?></td>
+				<td><?= explode(' ', $todo->date)[0] ?></td>
 				<td><?= $todo->name ?></td>
 				<td><?= $todo->notes ?></td>
 				<td class="text-right">
