@@ -31,30 +31,6 @@ class Clear {
 	const REQUIRED      = '_.~"(_.~"(_.~"(_.~"(_.~"(_'; // breaking waves
 	const ALLOWED_EMPTY = '_,-`"`-._,-`"`-._,-`"`-._';  // waves
 	
-	public static function template($file, $return=false) {
-		$file = rcut(trim(trim($file), '/'), '.php');
-		if (!$file) {
-			return false;
-		}
-		if ($return) {
-			return BASEDIR . "/$file.php";
-		} else {
-			require BASEDIR . "/$file.php";
-		}
-	}
-	
-	public static function model($file, $return=false) {
-		$file = rcut(rcut(trim(trim($file), '/'), '.php'), '.model');
-		if (!$file) {
-			return false;
-		}
-		if ($return) {
-			return BASEDIR . "/$file.model.php";
-		} else {
-			require_once BASEDIR . "/$file.model.php";
-		}
-	}
-	
 	public static function defaults($input, $defaults) {
 		$return = array();
 		foreach($defaults as $key => $val) {
@@ -82,6 +58,18 @@ class Clear {
 		return $return;
 	}
 	
+	public static function model($file, $return=false) {
+		$file = rcut(rcut(trim(trim($file), '/'), '.php'), '.model');
+		if (!$file) {
+			return false;
+		}
+		if ($return) {
+			return BASEDIR . "/$file.model.php";
+		} else {
+			require_once BASEDIR . "/$file.model.php";
+		}
+	}
+	
 	/**
 	 * Redirect helper
 	 *
@@ -98,6 +86,18 @@ class Clear {
 	public static function redirect($URL, $code=303) {
 		header('location: ' . BASEURL . $URL, true, $code);
 		die();
+	}
+	
+	public static function template($file, $return=false) {
+		$file = rcut(trim(trim($file), '/'), '.php');
+		if (!$file) {
+			return false;
+		}
+		if ($return) {
+			return BASEDIR . "/$file.php";
+		} else {
+			require BASEDIR . "/$file.php";
+		}
 	}
 }
 
