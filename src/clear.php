@@ -31,9 +31,9 @@ class Clear {
 	const REQUIRED      = '_.~"(_.~"(_.~"(_.~"(_.~"(_';   // breaking waves
 	const ALLOWED_EMPTY = '_,-*"`-._,-*"`-._,-*"`-._';    // waves
 	
-	public static function defaults($input, $defaults) {
+	public static function extract($input, $extract) {
 		$return = array();
-		foreach($defaults as $key => $val) {
+		foreach($extract as $key => $val) {
 			if ($val === static::NOTSET) {
 				if (!isset($input[$key]) || $input[$key] === '') {
 					continue;
