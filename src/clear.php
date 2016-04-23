@@ -55,29 +55,29 @@ class Clear {
 		}
 	}
 	
-	public static function defaults($array, $defaults) {
+	public static function defaults($input, $defaults) {
 		$return = array();
 		foreach($defaults as $key => $val) {
 			if ($val === static::NOTSET) {
-				if (!isset($array[$key]) || $array[$key] === '') {
+				if (!isset($input[$key]) || $input[$key] === '') {
 					continue;
 				}
 			} else if ($val === static::OPTIONAL) {
-				if (!isset($array[$key])) {
+				if (!isset($input[$key])) {
 					continue;
 				}
 			} else if ($val === static::REQUIRED) {
-				if (!isset($array[$key])) {
+				if (!isset($input[$key])) {
 					throw new Exception("Required value '$key' not provided");
-				} else if ($array[$key] === '') {
+				} else if ($input[$key] === '') {
 					throw new Exception("Required value '$key' not allowed to be empty");
 				}
 			} else if ($val === static::ALLOWED_EMPTY) {
-				if (!isset($array[$key])) {
+				if (!isset($input[$key])) {
 					throw new Exception("Required value '$key' not provided");
 				}
 			}
-			$return[$key] = isset($array[$key]) ? $array[$key] : $val;
+			$return[$key] = isset($input[$key]) ? $input[$key] : $val;
 		}
 		return $return;
 	}
