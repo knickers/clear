@@ -13,3 +13,23 @@
 	* You don't have to write a database model if you don't want to!
 	* You don't even have to include `clear` if you don't want to!
 
+## Clear::defaults(array $array, array $defaults): array
+
+`Clear::defaults` will return a new array with only the specified values extracted from the given array. It will also fill in any allowed missing values and throw exceptions for required values.
+
+```php
+$model->insert(Clear::defaults($_POST, array(
+	'name' => Clear::REQUIRED,
+	'date' => Clear::NOTSET,
+	'notes' => '',
+)));
+```
+
+#### Constants
+
+ Name         | Description
+--------------|------------
+NOTSET        | Skip the value if it is missing or empty.
+OPTIONAL      | Skip the value if it is missing.
+REQUIRED      | Throw an exception if the value is missing or empty,
+ALLOWED_EMPTY | Throw an exception if the value is missing.
