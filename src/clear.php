@@ -27,9 +27,9 @@ DEFINE('RELURL', lcut(CURDIR, BASEDIR));
 
 class Clear {
 	// One-line ascii art : http://www.ascii-code.com/ascii-art/one-line.php
-	const NOTSET              = '(^_^) [o_o] (^.^) (".") ($.$)'; // faces
-	const PARAM_REQUIRED      = '_.~"(_.~"(_.~"(_.~"(_.~"(_';    // waves
-	const PARAM_ALLOWED_EMPTY = '_,-`"`-._,-`"`-._,-`"`-._';     // waves
+	const NOTSET        = '(^_^) [o_o] (^.^) (".") ($.$)'; // faces
+	const REQUIRED      = '_.~"(_.~"(_.~"(_.~"(_.~"(_';    // waves
+	const ALLOWED_EMPTY = '_,-`"`-._,-`"`-._,-`"`-._';     // waves
 	public static function require($fileregex, $once=false) {
 		$files = glob($fileregex);
 		foreach($files as $file) {
@@ -65,8 +65,27 @@ class Clear {
 		}
 	}
 	
-	public static function get($name, $default='') {
-		return isset($_GET[$name]) ? $_GET[$name] : $default;
+	public static function defaults($array, $defaults) {
+		$return = array();
+		foreach($defaults as $key => $val) {
+			if ($val === static::REQUIRED) {
+				if (!isset($array[$key])) {
+					throw new Exception("Required value '$key' not provided");
+				} else if ($array[$key] === '') {
+					throw new Exception("Required value '$key' not allowed to be empty");
+				}
+			} else if ($val === static::ALLOWED_EMPTY) {
+				if (!isset($array[$key])) {
+					throw new Exception("Required value '$key' not provided");
+				}
+			} else if ($val === static::NOTSET) {
+				if (!isset($array[$key])) {
+					continue;
+				}
+			}
+			$return[$key] = isset($array[$key]) ? $array[$key] : $val;
+		}
+		return $return;
 	}
 	
 	/**
