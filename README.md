@@ -12,3 +12,5 @@
 	* You don't have to write a page controller if you don't want to!
 	* You don't have to write a database model if you don't want to!
 	* You don't even have to include `clear` if you don't want to!
+
+See documentation [on the wiki](https://github.com/knickers/clear/wiki).
