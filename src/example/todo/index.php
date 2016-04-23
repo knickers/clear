@@ -38,10 +38,16 @@
 			<form action="<?= RELURL ?>/update.php" method="POST">
 				<input type="hidden" name="id" value="<?= $todo->id ?>"/>
 				<tr>
-					<td class="toggle-view"><?= $todo->date ?></td>
-					<td class="toggle-view"><?= $todo->name ?></td>
-					<td class="toggle-view"><?= $todo->notes ?></td>
-					<td class="toggle-view text-right">
+					<td class="toggle-view" style="width: 20%;">
+						<?= $todo->date ?>
+					</td>
+					<td class="toggle-view" style="width: 30%;">
+						<?= $todo->name ?>
+					</td>
+					<td class="toggle-view" style="width: 40%;">
+						<?= $todo->notes ?>
+					</td>
+					<td class="toggle-view text-right" style="width: 10%;">
 						<a href="#" title="Edit" class="toggle-edit-btn">
 							<span class="glyphicon glyphicon-pencil"></span>
 						</a>
