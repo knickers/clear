@@ -11,10 +11,10 @@
 		<br>
 	</div>
 	<div class="col-sm-6">
-		<textarea name="notes" rows="4" class="form-control" placeholder="Notes"></textarea>
+		<textarea name="notes" class="form-control" placeholder="Notes" style="height: 88px;"></textarea>
+		<br>
 	</div>
 	<div class="col-sm-12 text-right">
-		<br class="visible-xs">
 		<button type="submit" class="btn btn-default">Add</button>
 	</div>
 </form>
@@ -50,12 +50,7 @@
 				</td>
 			</tr>
 		<?php endforeach ?>
-		<tr>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-		</tr>
+		<tr><td colspan="4">&nbsp;</td></tr>
 	</tbody>
 	<thead>
 		<tr>
