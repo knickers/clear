@@ -134,7 +134,7 @@ class ClearModel {
 	 * Set values of a row by primary key
 	 *
 	 * @param $data, values to be updated
-	 * @param $id, table primary key
+	 * @param $options, primary key value, or array of WHERE clause
 	 * @return Statement
 	 */
 	public static function set($data, $options) {

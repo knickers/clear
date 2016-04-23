@@ -26,20 +26,10 @@ DEFINE('BASEURL', 'http' . (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on
 DEFINE('RELURL', lcut(CURDIR, BASEDIR));
 
 class Clear {
-	// One-line ascii art : http://www.ascii-code.com/ascii-art/one-line.php
-	const NOTSET        = '(^_^) [o_o] (^.^) (".") ($.$)'; // faces
-	const REQUIRED      = '_.~"(_.~"(_.~"(_.~"(_.~"(_';    // waves
-	const ALLOWED_EMPTY = '_,-`"`-._,-`"`-._,-`"`-._';     // waves
-	public static function require($fileregex, $once=false) {
-		$files = glob($fileregex);
-		foreach($files as $file) {
-			if ($once) {
-				require_once $file;
-			} else {
-				require $file;
-			}
-		}
-	}
+	const NOTSET        = '(^_^)[o_o](^.^)(".")($.$)';  // faces
+	const OPTIONAL      = '</////|==================-'; // foil (fencing sword)
+	const REQUIRED      = '_.~"(_.~"(_.~"(_.~"(_.~"(_'; // breaking waves
+	const ALLOWED_EMPTY = '_,-`"`-._,-`"`-._,-`"`-._';  // waves
 	
 	public static function template($file, $return=false) {
 		$file = rcut(trim(trim($file), '/'), '.php');
@@ -68,7 +58,15 @@ class Clear {
 	public static function defaults($array, $defaults) {
 		$return = array();
 		foreach($defaults as $key => $val) {
-			if ($val === static::REQUIRED) {
+			if ($val === static::NOTSET) {
+				if (!isset($array[$key]) || $array[$key] === '') {
+					continue;
+				}
+			} else if ($val === static::OPTIONAL) {
+				if (!isset($array[$key])) {
+					continue;
+				}
+			} else if ($val === static::REQUIRED) {
 				if (!isset($array[$key])) {
 					throw new Exception("Required value '$key' not provided");
 				} else if ($array[$key] === '') {
@@ -77,10 +75,6 @@ class Clear {
 			} else if ($val === static::ALLOWED_EMPTY) {
 				if (!isset($array[$key])) {
 					throw new Exception("Required value '$key' not provided");
-				}
-			} else if ($val === static::NOTSET) {
-				if (!isset($array[$key])) {
-					continue;
 				}
 			}
 			$return[$key] = isset($array[$key]) ? $array[$key] : $val;
@@ -102,7 +96,7 @@ class Clear {
 	 * @return none die();
 	 */
 	public static function redirect($URL, $code=303) {
-		header('location: '.BASEURL.$URL, true, $code);
+		header('location: ' . BASEURL . $URL, true, $code);
 		die();
 	}
 }
