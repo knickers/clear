@@ -35,20 +35,44 @@
 			</tr>
 		<?php endif ?>
 		<?php foreach ($todos as $i => $todo): ?>
-			<tr>
-				<td><?= $todo->date ?></td>
-				<td><?= $todo->name ?></td>
-				<td><?= $todo->notes ?></td>
-				<td class="text-right">
-					<a href="<?= RELURL ?>/done.php?id=<?= $todo->id ?>" title="Mark as Complete">
-						<span class="glyphicon glyphicon-ok"></span>
-					</a>
-					&nbsp;
-					<a href="<?= RELURL ?>/delete.php?id=<?= $todo->id ?>" title="Delete">
-						<span class="glyphicon glyphicon-trash"></span>
-					</a>
-				</td>
-			</tr>
+			<form action="<?= RELURL ?>/update.php" method="POST">
+				<input type="hidden" name="id" value="<?= $todo->id ?>"/>
+				<tr>
+					<td class="toggle-view"><?= $todo->date ?></td>
+					<td class="toggle-view"><?= $todo->name ?></td>
+					<td class="toggle-view"><?= $todo->notes ?></td>
+					<td class="toggle-view text-right">
+						<a href="#" title="Edit" class="toggle-edit-btn">
+							<span class="glyphicon glyphicon-pencil"></span>
+						</a>
+						&nbsp;
+						<a href="<?= RELURL ?>/done.php?id=<?= $todo->id ?>" title="Mark as Complete">
+							<span class="glyphicon glyphicon-ok"></span>
+						</a>
+						&nbsp;
+						<a href="<?= RELURL ?>/delete.php?id=<?= $todo->id ?>" title="Delete">
+							<span class="glyphicon glyphicon-trash"></span>
+						</a>
+					</td>
+					<td class="toggle-edit hide">
+						<input type="datetime-local" name="date" value="<?= str_replace(' ', 'T', $todo->date) ?>" class="form-control"/>
+					</td>
+					<td class="toggle-edit hide">
+						<input type="text" name="name" value="<?= $todo->name ?>" class="form-control" placeholder="Name"/>
+					</td>
+					<td class="toggle-edit hide">
+						<textarea name="notes" class="form-control" placeholder="Notes" style="height: 88px;"><?= $todo->notes ?></textarea>
+					</td>
+					<td class="toggle-edit hide text-right">
+						<button type="submit" class="btn btn-block btn-default">
+							Update
+						</button>
+						<div class="btn btn-block btn-default toggle-view-btn">
+							Cancel
+						</div>
+					</td>
+				</tr>
+			</form>
 		<?php endforeach ?>
 		<tr><td colspan="4">&nbsp;</td></tr>
 	</tbody>
@@ -83,5 +107,23 @@
 		<?php endforeach ?>
 	</tbody>
 </table>
+
+<script>
+jQuery(function($) {
+	$('.toggle-view-btn').on('click', function(e) {
+		var parent = $(this).parents('tr');
+		parent.find('.toggle-view').removeClass('hide');
+		parent.find('.toggle-edit').addClass('hide');
+		return false;
+	});
+	
+	$('.toggle-edit-btn').on('click', function(e) {
+		var parent = $(this).parents('tr');
+		parent.find('.toggle-view').addClass('hide');
+		parent.find('.toggle-edit').removeClass('hide');
+		return false;
+	});
+});
+</script>
 
 <?php Clear::template('_footer') ?>
