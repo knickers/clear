@@ -26,10 +26,10 @@ DEFINE('BASEURL', 'http' . (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on
 DEFINE('RELURL', lcut(CURDIR, BASEDIR));
 
 class Clear {
-	const NOTSET        = '(^_^)[o_o](^.^)(".")($.$)';  // faces
-	const OPTIONAL      = '</////|==================-'; // foil (fencing sword)
-	const REQUIRED      = '_.~"(_.~"(_.~"(_.~"(_.~"(_'; // breaking waves
-	const ALLOWED_EMPTY = '_,-`"`-._,-`"`-._,-`"`-._';  // waves
+	const NOTSET        = '(^_^)[o_o](^.^)(".")($.$)';    // faces
+	const OPTIONAL      = '</////|====================-'; // foil, fencing sword
+	const REQUIRED      = '_.~"(_.~"(_.~"(_.~"(_.~"(_';   // breaking waves
+	const ALLOWED_EMPTY = '_,-*"`-._,-*"`-._,-*"`-._';    // waves
 	
 	public static function defaults($input, $defaults) {
 		$return = array();
