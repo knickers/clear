@@ -1,6 +1,6 @@
 <?php
 require_once '../../clear.php';
-Clear::model('clear-sql');
+Clear::model('sql');
 
 class TodoModel extends ClearModel {
 	static protected $table = 'todo';

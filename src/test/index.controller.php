@@ -1,7 +1,7 @@
 <?php
 require_once '../clear.php';
 
-Clear::model('clear-sql');
+Clear::model('sql');
 
 $model = new ClearModel();
 $model->init();
