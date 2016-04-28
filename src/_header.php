@@ -23,3 +23,9 @@ RELURL  : <?= RELURL ?></pre>
 				<div>Session</div>
 				<pre><?php var_export($_SESSION) ?></pre>
 			<?php endif ?>
+			<?php if (isset($_GET['rand_str'])): ?>
+				<?php $len = $_GET['rand_str'] == '' ? 30 : $_GET['rand_str'] ?>
+				<?php $str = Clear::randomString($len) ?>
+				<div>Random String</div>
+				<pre><?= $str . ' (length = ' . strlen($str) . ')'?></pre>
+			<?php endif ?>

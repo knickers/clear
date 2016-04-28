@@ -70,6 +70,22 @@ class Clear {
 		}
 	}
 	
+	public static function randomString($len=30) {
+		$fp = @fopen('/dev/urandom','rb');
+		$str = '';
+		if ($fp !== FALSE) {
+			$str .= @fread($fp, $len);
+			@fclose($fp);
+		} else {
+			trigger_error('Can not open /dev/urandom.');
+		}
+		$str = base64_encode($str);        // convert from binary to string
+		$str = strtr($str, '+/', '-_');    // remove non-url chars
+		$str = str_replace('=', '', $str); // Remove = from the end
+		
+		return substr($str, 0, $len);
+	}
+	
 	/**
 	 * Redirect helper
 	 *
