@@ -6,9 +6,9 @@
 	</head>
 	<body>
 		<div class="container">
-<?php if (!isset($_GET['globals'])) return ?>
-<div>Global Variables</div>
-<pre>
+			<?php if (isset($_GET['globs'])): ?>
+				<div>Global Variables</div>
+				<pre>
 CURFILE : <?= CURFILE ?>
 
 CURDIR  : <?= CURDIR ?>
@@ -17,5 +17,9 @@ BASEDIR : <?= BASEDIR ?>
 
 BASEURL : <?= BASEURL ?>
 
-RELURL  : <?= RELURL ?>
-</pre>
+RELURL  : <?= RELURL ?></pre>
+			<?php endif ?>
+			<?php if (isset($_GET['ses'])): ?>
+				<div>Session</div>
+				<pre><?php var_export($_SESSION) ?></pre>
+			<?php endif ?>
