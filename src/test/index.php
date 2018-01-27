@@ -9,7 +9,7 @@
 </ul>
 
 <br>
-<h2>MySQL Debuging</h2>
+<h2>MySQL Debug Loging</h2>
 
 <form action="" method="POST">
 	<?php if ($debug): ?>
