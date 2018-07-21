@@ -20,7 +20,7 @@ Enable mysql general log:
 Custom file extensions are used as a naming convention, this way it's easy to spot which files perform what functions, the files are sorted in normal alphabetical order, and web servers will only serve filed dedicated to pages.
 
 Extension | Purpose    | Description
-----------+------------+------------
+----------|------------|------------
 `.php`    | Page       | A web-accessible file that servers will recognize.
 `.pht`    | Template   | Include-able template views for reusing components.
 `.phc`    | Controller | Controller code to validate and prepare page variables.
