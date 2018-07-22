@@ -1,5 +1,4 @@
 <?php
-
 function lcut($string, $cutString) {
 	$len = strlen($cutString);
 	if (substr($string, 0, $len) === $cutString) {
@@ -18,117 +17,83 @@ function cut($string, $cutString) {
 	return lcut(rcut($string, $cutString), $cutString);
 }
 
-DEFINE('CURFILE', basename($_SERVER['PHP_SELF']));
-DEFINE('CURFILENAME', basename($_SERVER['PHP_SELF'], '.php'));
-DEFINE('CURDIR', getcwd()); // Current Working Directory
-DEFINE('BASEDIR', __DIR__); // Directory of THIS file (clear.php)
-DEFINE('BASEURL', 'http' . (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? 's' : '') . '://' . $_SERVER['HTTP_HOST']);
-DEFINE('RELURL', lcut(CURDIR, BASEDIR));
-DEFINE('CSRFSECRET', 'UA-2Q0eIUgLSlrAcDM_1-a1oF_Q7FFCK');
+DEFINE('CURFILE',       basename($_SERVER['PHP_SELF']));
+DEFINE('CURFILENAME',   basename($_SERVER['PHP_SELF'], '.php'));
+DEFINE('CURDIR',        getcwd()); // Current Working Directory
+DEFINE('BASEDIR',       __DIR__); // Directory of THIS file (clear.php)
+DEFINE('BASEURL',       'http' . (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? 's' : '') . '://' . $_SERVER['HTTP_HOST']);
+DEFINE('RELURL',        lcut(CURDIR, BASEDIR));
+DEFINE('NOTSET',        '(^_^)[o_o](^.^)(".")($.$)');    // faces
+DEFINE('OPTIONAL',      '</////|====================-'); // foil, fencing sword
+DEFINE('REQUIRED',      '_.~"(_.~"(_.~"(_.~"(_.~"(_');   // breaking waves
+DEFINE('ALLOWED_EMPTY', '_,-*"`-._,-*"`-._,-*"`-._');    // rolling waves
+DEFINE('CSRFSECRET',    'zA-2Q0eIUgLSlrAcDM_1-a1oF_Q7FFCK');
 
-class Clear {
-	const NOTSET        = '(^_^)[o_o](^.^)(".")($.$)';    // faces
-	const OPTIONAL      = '</////|====================-'; // foil, fencing sword
-	const REQUIRED      = '_.~"(_.~"(_.~"(_.~"(_.~"(_';   // breaking waves
-	const ALLOWED_EMPTY = '_,-*"`-._,-*"`-._,-*"`-._';    // waves
+function randomString($len=30) {
+	$fp = @fopen('/dev/urandom','rb');
+	$str = '';
+	if ($fp !== FALSE) {
+		$str .= @fread($fp, $len);
+		@fclose($fp);
+	} else {
+		trigger_error('Can not open /dev/urandom.');
+	}
+	$str = base64_encode($str);        // convert from binary to string
+	$str = strtr($str, '+/', '-_');    // remove non-url chars
+	$str = str_replace('=', '', $str); // Remove = from the end
 	
-	public static function extract($input, $extract) {
-		$return = array();
-		foreach($extract as $key => $val) {
-			if ($val === static::NOTSET) {
-				if (!isset($input[$key]) || $input[$key] === '') {
-					continue;
-				}
-			} else if ($val === static::OPTIONAL) {
-				if (!isset($input[$key])) {
-					continue;
-				}
-			} else if ($val === static::REQUIRED) {
-				if (!isset($input[$key])) {
-					throw new Exception("Required value '$key' not provided");
-				} else if ($input[$key] === '') {
-					throw new Exception("Required value '$key' not allowed to be empty");
-				}
-			} else if ($val === static::ALLOWED_EMPTY) {
-				if (!isset($input[$key])) {
-					throw new Exception("Required value '$key' not provided");
-				}
+	return substr($str, 0, $len);
+}
+
+/**
+ * @param  $URL  string  relative URL, '/' = home
+ * @param  $code int     HTML status code
+ *               301     Moved permanently
+ *               302     Found
+ *               303     See other (for POST redirect GET)
+ *               304     Not modified
+ *               307     Temporary redirect
+ * @return       none    die();
+ */
+function redirect($URL, $code=303) {
+	header('location: ' . BASEURL . $URL, true, $code);
+	die();
+}
+
+function array_extract($input, $extract) {
+	$return = [];
+	foreach($extract as $key => $val) {
+		if ($val === NOTSET) {
+			if (!isset($input[$key]) || $input[$key] === '') {
+				continue;
 			}
+		}
+		else if ($val === OPTIONAL) {
+			if (!isset($input[$key])) {
+				continue;
+			}
+		}
+		else if ($val === REQUIRED) {
+			if (!isset($input[$key]) || $input[$key] === '') {
+				throw new Exception("Required value '$key' not provided");
+			}
+		}
+		else if ($val === ALLOWED_EMPTY) {
+			if (!isset($input[$key])) {
+				throw new Exception("Required value '$key' not provided");
+			}
+		}
+		else {
 			$return[$key] = isset($input[$key]) ? $input[$key] : $val;
 		}
-		return $return;
 	}
-	
-	public static function model($file, $return=false) {
-		$file = rcut(rcut(trim(trim($file), '/'), '.php'), '.model');
-		if (!$file) {
-			return false;
-		}
-		if ($return) {
-			return BASEDIR . "/$file.model.php";
-		} else {
-			require_once BASEDIR . "/$file.model.php";
-		}
-	}
-	
-	public static function randomString($len=30) {
-		$fp = @fopen('/dev/urandom','rb');
-		$str = '';
-		if ($fp !== FALSE) {
-			$str .= @fread($fp, $len);
-			@fclose($fp);
-		} else {
-			trigger_error('Can not open /dev/urandom.');
-		}
-		$str = base64_encode($str);        // convert from binary to string
-		$str = strtr($str, '+/', '-_');    // remove non-url chars
-		$str = str_replace('=', '', $str); // Remove = from the end
-		
-		return substr($str, 0, $len);
-	}
-	
-	/**
-	 * Redirect helper
-	 *
-	 * @param $URL string relative URL, '/' = home
-	 * @param $code int, HTML status code
-	 *   301 = Moved permanently
-	 *   302 = Found
-	 *   303 = See other (for POST redirect GET)
-	 *   304 = Not modified
-	 *   307 = Temporary redirect
-	 *
-	 * @return none die();
-	 */
-	public static function redirect($URL, $code=303) {
-		header('location: ' . BASEURL . $URL, true, $code);
-		die();
-	}
-	
-	public static function template($file, $return=false) {
-		$file = rcut(trim(trim($file), '/'), '.php');
-		if (!$file) {
-			return false;
-		}
-		if ($return) {
-			return BASEDIR . "/$file.php";
-		} else {
-			require BASEDIR . "/$file.php";
-		}
-	}
+	return $return;
 }
 
-class CSRF {
-	public static function generate($name) {
-		return hash('sha256', session_id() . $name . CSRFSECRET);
-	}
-	
-	public static function verify($name, $token) {
-		return $token === self::generate($name);
-	}
+function csrfGenerate($name) {
+	return hash('sha256', session_id() . $name . CSRFSECRET);
 }
 
-// Include a crontroller for this page if available
-if (file_exists(CURDIR . '/' . CURFILENAME . '.controller.php')) {
-	include CURDIR . '/' . CURFILENAME . '.controller.php';
+function csrfVerify($name, $token) {
+	return $token === csrfGenerate($name);
 }
