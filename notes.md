@@ -31,7 +31,7 @@ Returning from an included file is like returning from a function, execution con
 
 ## Page
 
-Create a normal `.php` file, your web server will serve it up just like usual. It can be in any subdirectory to build your desired url path.
+Create a normal `.php` file, web servers will serve it up just like usual. It can be in any subdirectory to build the desired url path.
 
 ## Template
 
@@ -77,29 +77,22 @@ include 'navigation.pht';
 <?php
 $pagename = 'Home';
 
+/*
+ * If a controller is only used when a form is posted,
+ * then simply return back to the parent file when not needed.
+ */
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 	return;
 }
 
-$required = ['name', 'email', 'comment'];
-
-foreach ($required as $key) {
-	if (empty($_POST[$key])) {
-		$missing[$key] = true;
-	}
-	else {
-		$$key = $_POST[$key];
-	}
-}
-
-if (!empty($missing)) {
-	return;
-}
-
 /**
- * Do something with the new variables
+ * Validate post variables.
+ * Created message and error variables will be accessible to the calling file.
+ * Return at any time to calling file.
+ * Perform DB queries.
+ * Redirect if all was successful.
+ * BE SURE TO CALL die(); AFTER REDIRECTING!
  */
-
 header("Location: https://example.com/", true, 303);
 die();
 ```
