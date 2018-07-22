@@ -17,13 +17,16 @@ Enable mysql general log:
 
 # Overview
 
-Custom file extensions are used as a naming convention, this way it's easy to spot which files perform what functions, the files are sorted in normal alphabetical order, and web servers will only serve filed dedicated to pages.
+Custom file extensions can be used as a naming convention, this offers some exciting benefits:
+ * It's easy to spot which files perform what functions
+ * The files are sorted in normal alphabetical order next to other related files
+ * Web servers will only serve `.pjp` files dedicated for pages
 
-Purpose    | Extension | Description
------------|-----------|------------
+Purpose    | Possible Extensions | Description
+-----------|---------------------|------------
 Page       |`.php`     | A web-accessible file that servers will recognize.
-Template   |`.pht` `.t` `.template`| Include-able template views for reusing components.
-Controller |`.phc` `.c` `.controller`| Controller code to validate and prepare page variables.
+Template   |`.pht` `.t` `.tpl` `.template`| Include-able template views for reusing components.
+Controller |`.phc` `.c` `.ctrl` `.controller`| Controller code to validate and prepare page variables.
 
 Variables are available inside included files, so passing data around is easy. Declare a page name to be used in an included html head tag, or the controller can fetch data from the DB to be used in the main page.
 
