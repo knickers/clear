@@ -20,7 +20,7 @@ Enable mysql general log:
 Custom file extensions can be used as a naming convention, this offers some exciting benefits:
  * It's easy to spot which files perform what functions
  * The files are sorted in normal alphabetical order next to other related files
- * Web servers will only serve `.pjp` files dedicated for pages
+ * Web servers will only serve `.php` files dedicated for pages
 
 Purpose    | Possible Extensions | Description
 -----------|---------------------|------------
