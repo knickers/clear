@@ -24,6 +24,7 @@ DEFINE('CURDIR', getcwd()); // Current Working Directory
 DEFINE('BASEDIR', __DIR__); // Directory of THIS file (clear.php)
 DEFINE('BASEURL', 'http' . (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? 's' : '') . '://' . $_SERVER['HTTP_HOST']);
 DEFINE('RELURL', lcut(CURDIR, BASEDIR));
+DEFINE('CSRFSECRET', 'UA-2Q0eIUgLSlrAcDM_1-a1oF_Q7FFCK');
 
 class Clear {
 	const NOTSET        = '(^_^)[o_o](^.^)(".")($.$)';    // faces
@@ -114,6 +115,16 @@ class Clear {
 		} else {
 			require BASEDIR . "/$file.php";
 		}
+	}
+}
+
+class CSRF {
+	public static function generate($name) {
+		return hash('sha256', session_id() . $name . CSRFSECRET);
+	}
+	
+	public static function verify($name, $token) {
+		return $token === self::generate($name);
 	}
 }
 
