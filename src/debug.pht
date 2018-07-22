@@ -1,0 +1,37 @@
+<? if (isset($_GET['globs'])): ?>
+	<div>Global Variables</div>
+	<pre>
+CURFILE : <?= CURFILE ?>
+
+CURDIR  : <?= CURDIR ?>
+
+BASEDIR : <?= BASEDIR ?>
+
+BASEURL : <?= BASEURL ?>
+
+RELURL  : <?= RELURL ?>
+</pre>
+<? endif ?>
+
+<? if (isset($_GET['ses'])): ?>
+	<? if (empty($_GET['ses'])): ?>
+		<pre>$_SESSION = <? var_export($_SESSION) ?></pre>
+	<? else: ?>
+		<pre>$_SESSION['<?= $_GET['ses'] ?>'] = <? var_export($_SESSION[$_GET['ses']]) ?></pre>
+	<? endif ?>
+<? endif ?>
+
+<? if (isset($_GET['rands'])): ?>
+	<? $len = $_GET['rands'] == '' ? 30 : $_GET['rands'] ?>
+	<? $str = randomString($len) ?>
+	<div>Random String (length = <?= strlen($str) ?>)</div>
+	<pre><?= $str ?></pre>
+<? endif ?>
+
+<?php if (isset($_GET['server'])): ?>
+	<? if (empty($_GET['server'])): ?>
+		<pre>$_SERVER = <? var_export($_SERVER) ?></pre>
+	<? else: ?>
+		<pre>$_SERVER['<?= $_GET['server'] ?>'] = <? var_export($_SERVER[$_GET['server']]) ?></pre>
+	<? endif ?>
+<?php endif ?>

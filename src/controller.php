@@ -1,6 +1,15 @@
-<?php require_once 'clear.php' ?>
-<?php Clear::template('_header') ?>
+<?
+require_once 'clear.php';
+require_once 'controller.phc';
+require 'header.pht';
+require 'nav.pht';
+?>
 
-<h1><?= $hello ?> from controller.php</h1>
+<div class="container my-4">
+	<h1><?= $hello ?> <?= $where ?> from controller.php</h1>
+</div>
 
-<?php Clear::template('_footer') ?>
+<?
+require 'footer.pht';
+require 'close.pht';
+?>

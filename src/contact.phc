@@ -1,0 +1,24 @@
+<?php
+$missing = [];
+$name = $email = $comment = '';
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+	return;
+}
+
+$required = ['name', 'email', 'comment'];
+
+foreach ($required as $key) {
+	if (empty($_POST[$key])) {
+		$missing[$key] = true;
+	}
+	else {
+		$$key = $_POST[$key];
+	}
+}
+
+if (!empty($missing)) {
+	return;
+}
+
+redirect('/contact.php');

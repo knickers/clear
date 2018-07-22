@@ -6,7 +6,7 @@ Clear is a collection of functions and design philosophy for building web applic
 
 ## Core design philosophy
 
-1. PHP's processors already have routers built in, stop writing routers in PHP.
+1. PHP's servers already have routers built in, stop writing routers in PHP.
 2. PHP is already a templating language, stop using another one on top of it.
 3. Lets get back to the old days where adding a new page to our websites was as easy as creating ONE FILE.
 	* You don't have to define a route for the new page!
@@ -36,13 +36,23 @@ Returning from an included file is like returning from a function, execution con
 
 ## Page
 
-Create a normal `.php` file, web servers will serve it up just like usual. It can be in any subdirectory to build the desired url path.
+Create a normal `.php` file, web servers will execute the code and serve up the output just like usual. It can be in any subdirectory to build the desired url path.
 
 ## Template
 
+Make sure 'short open tags' are enabled in `php.ini`. This makes php templating so nice!
+
+```phtml
+<!-- Execute a php statement -->
+<? $var = 42 ?>
+
+<!-- Echo a string to the html -->
+<p>The answer is: <?= $var ?>!</p>
+```
+
 `index.php`
 ```phtml
-<?php
+<?
 $pagename = 'Home';
 include 'header.pht';
 include 'navigation.pht';
@@ -67,7 +77,7 @@ include 'navigation.pht';
 
 `index.php`
 ```phtml
-<?php
+<?
 include 'index.phc';
 include 'header.pht';
 include 'navigation.pht';

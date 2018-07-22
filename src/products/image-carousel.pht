@@ -1,0 +1,51 @@
+<? if (empty($productDirectory)) {
+	return;
+}
+$files = scandir($productDirectory.'/img');
+if (empty($files)) {
+	return;
+}
+$files = array_values(array_diff($files, ['.', '..']));
+?>
+<div id="product-<?= $productDirectory ?>-carousel"
+	class="carousel"
+	no-data-ride="carousel"
+>
+	<div class="carousel-inner">
+		<? foreach($files as $i => $file): ?>
+			<div class="carousel-item <?= $i ? '' : 'active' ?>">
+				<img class="d-block w-100"
+					src="/products/<?= $productDirectory ?>/img/<?= $file ?>"
+					alt="<?= $file ?>"
+				>
+			</div>
+		<? endforeach ?>
+	</div>
+	<a class="carousel-control-prev"
+		href="#product-<?= $productDirectory ?>-carousel"
+		role="button"
+		data-slide="prev"
+	>
+		<span class="carousel-control-prev-icon" aria-hidden="true">
+		</span>
+		<span class="sr-only">Previous</span>
+	</a>
+	<a class="carousel-control-next"
+		href="#product-<?= $productDirectory ?>-carousel"
+		role="button"
+		data-slide="next"
+	>
+		<span class="carousel-control-next-icon" aria-hidden="true">
+		</span>
+		<span class="sr-only">Next</span>
+	</a>
+</div>
+<div class="thumbnails mt-3">
+	<? foreach($files as $i => $file): ?>
+		<img src="/products/<?= $productDirectory ?>/img/<?= $file ?>"
+			alt="<?= $file ?>"
+			data-target="#product-<?= $productDirectory ?>-carousel"
+			data-slide-to="<?= $i ?>"
+		>
+	<? endforeach ?>
+</div>

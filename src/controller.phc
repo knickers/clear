@@ -1,0 +1,4 @@
+<?php
+
+$hello = 'Hello';
+$where = empty($_GET['where']) ? '' : $_GET['where'];
