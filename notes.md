@@ -24,9 +24,10 @@ Custom file extensions can be used as a naming convention, this offers some exci
 
 Purpose    | Possible Extensions | Description
 -----------|---------------------|------------
-Page       |`.php`     | A web-accessible file that servers will recognize.
-Template   |`.pht` `.t` `.tpl` `.template`| Include-able template views for reusing components.
-Controller |`.phc` `.c` `.ctrl` `.controller`| Controller code to validate and prepare page variables.
+Page       |`.php`               | A web-accessible file that servers will recognize
+Template   |`.pht` `.t` `.tpl` `.template`| Include-able template views for reusing components
+Controller |`.phc` `.c` `.ctrl` `.controller`| Controller code to validate and prepare variables
+Model      |`.phm` `.m` `.model` | Class or functions for interacting with databases
 
 Variables are available inside included files, so passing data around is easy. Declare a page name to be used in an included html head tag, or the controller can fetch data from the DB to be used in the main page.
 
