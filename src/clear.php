@@ -90,6 +90,31 @@ function array_extract($input, $extract) {
 	return $return;
 }
 
+/**
+ * A prettier var_export()
+ *
+ * var_export()           export()
+ *
+ * array (                array (
+ *   '_GET' =>                '_GET' => array (
+ *   array (                      'id' => '12',
+ *     'id' => '12',          ),
+ *   ),                       '_POST' => array(),
+ *   '_POST' =>           ),
+ *   array (
+ *   ),
+ * ),
+ */
+function export($var) {
+	$str = var_export($var, true);
+	// Put object values on the same line as the key
+	$str = preg_replace('/ => \n\s*(.*)/', ' => $1', $str);
+	// Collapse empty arrays
+	$str = preg_replace('/array ?\(\s*\)/', 'array()', $str);
+	// Increase indentation to 4 spaces
+	return str_replace('  ', '    ', $str);
+}
+
 function csrfGenerate($name) {
 	return hash('sha256', session_id() . $name . CSRFSECRET);
 }
