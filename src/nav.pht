@@ -1,15 +1,17 @@
 <?php
 function navLink($url, $text) {
 	$a = $url === $_SERVER['SCRIPT_NAME'] ? ' active' : '';
-	echo '<a href="'.$url.'" class="nav-item nav-link h5 px-3 mb-0'.$a.'">'.
-			$text.
-			($a ? ' <span class="sr-only">(current)</span>' : '').
-		'</a>';
-}
 ?>
+	<a href="<?= $url ?>" class="nav-item nav-link h5 px-3 mb-0 <?= $a ?>">
+		<?= $text ?>
+		<? if ($a): ?><span class="sr-only"> (current)</span><? endif ?>
+	</a>
+<? } ?>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 	<a class="navbar-brand" href="/">
-		<img src="/img/logo-500.png" height="50" alt="logo">
+		<img src="/img/icon.png" height="40" alt="logo">
+		<span class="align-middle">Clear PHP</span>
 	</a>
 	<button type="button"
 		class="navbar-toggler"
@@ -17,7 +19,7 @@ function navLink($url, $text) {
 		data-target="#site-navigation"
 		aria-controls="site-navigation"
 		aria-expanded="false"
-		aria-label="Toggle navigation"
+		aria-label="Toggle Navigation"
 	>
 		<span class="navbar-toggler-icon"></span>
 	</button>
