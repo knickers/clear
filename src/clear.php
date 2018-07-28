@@ -91,7 +91,7 @@ function array_extract($input, $extract) {
 }
 
 /**
- * A prettier var_export()
+ * A prettier var_export(). Always returns a string, never printing the result.
  *
  * var_export()           export()
  *

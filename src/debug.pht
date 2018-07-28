@@ -1,6 +1,16 @@
-<? if (isset($_GET['globs'])): ?>
-	<div>Global Variables</div>
-	<pre>
+<? if (isset($_GET['viewport'])): ?>
+	<h3 class="pl-1" style="position:sticky; margin-bottom:-30px; top:3px; z-index:10;">
+		<span class="          d-inline d-sm-none">xs</span>
+		<span class="d-none d-sm-inline d-md-none">sm</span>
+		<span class="d-none d-md-inline d-lg-none">md</span>
+		<span class="d-none d-lg-inline d-xl-none">lg</span>
+		<span class="d-none d-xl-inline          ">xl</span>
+	</h3>
+<? endif ?>
+<div class="container-fluid">
+	<? if (isset($_GET['globs'])): ?>
+		<h3 class="mt-2">Global Variables</h3>
+		<pre>
 CURFILE : <?= CURFILE ?>
 
 CURDIR  : <?= CURDIR ?>
@@ -11,27 +21,34 @@ BASEURL : <?= BASEURL ?>
 
 RELURL  : <?= RELURL ?>
 </pre>
-<? endif ?>
-
-<? if (isset($_GET['ses'])): ?>
-	<? if (empty($_GET['ses'])): ?>
-		<pre>$_SESSION = <? var_export($_SESSION) ?></pre>
-	<? else: ?>
-		<pre>$_SESSION['<?= $_GET['ses'] ?>'] = <? var_export($_SESSION[$_GET['ses']]) ?></pre>
 	<? endif ?>
-<? endif ?>
 
-<? if (isset($_GET['rands'])): ?>
-	<? $len = $_GET['rands'] == '' ? 30 : $_GET['rands'] ?>
-	<? $str = randomString($len) ?>
-	<div>Random String (length = <?= strlen($str) ?>)</div>
-	<pre><?= $str ?></pre>
-<? endif ?>
-
-<?php if (isset($_GET['server'])): ?>
-	<? if (empty($_GET['server'])): ?>
-		<pre>$_SERVER = <? var_export($_SERVER) ?></pre>
-	<? else: ?>
-		<pre>$_SERVER['<?= $_GET['server'] ?>'] = <? var_export($_SERVER[$_GET['server']]) ?></pre>
+	<? if (isset($_GET['rands'])): ?>
+		<? $len = empty($_GET['rands']) ? 30 : $_GET['rands'] ?>
+		<? $str = randomString($len) ?>
+		<h3 class="mt-2">Random String
+			<small><small>(length = <?= strlen($str) ?>)</small></small>
+		</h3>
+		<pre><?= $str ?></pre>
 	<? endif ?>
-<?php endif ?>
+
+	<? if (isset($_GET['ses'])): ?>
+		<? if (empty($_GET['ses'])): ?>
+			<pre class="mt-2">$_SESSION = <?= export($_SESSION) ?></pre>
+		<? else: ?>
+			<pre class="mt-2">$_SESSION['<?= $_GET['ses'] ?>'] = <?= export($_SESSION[$_GET['ses']]) ?></pre>
+		<? endif ?>
+	<? endif ?>
+
+	<? if (isset($_GET['vars'])): ?>
+		<h3 class="mt-2">
+			Local Variable<?= empty($_GET['vars']) ? 's' : '' ?>
+		</h3>
+		<? if (empty($_GET['vars'])): ?>
+			<pre><?= export(get_defined_vars()) ?></pre>
+		<? else: ?>
+			<? $var = $_GET['vars'] ?>
+			<pre>$<?= $_GET['vars'] ?> = <?= export($$var) ?></pre>
+		<? endif ?>
+	<? endif ?>
+</div>
