@@ -1,6 +1,6 @@
 <?
 require_once '../clear.php';
-//require BASEDIR.'/index.phc';
+require 'index.phc';
 require BASEDIR.'/header.pht';
 require BASEDIR.'/nav.pht';
 ?>

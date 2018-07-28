@@ -1,4 +1,8 @@
 <?php
+$pagename = 'To Do';
+
+return;
+
 Clear::model('example/todo/todo');
 $model = new TodoModel();
 $todos = $model->find(array('done' => 0), array('ORDER BY date'));
