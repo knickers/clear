@@ -20,7 +20,7 @@ function cut($string, $cutString) {
 DEFINE('CURFILE',       basename($_SERVER['PHP_SELF']));
 DEFINE('CURFILENAME',   basename($_SERVER['PHP_SELF'], '.php'));
 DEFINE('CURDIR',        getcwd()); // Current Working Directory
-DEFINE('BASEDIR',       __DIR__); // Directory of THIS file (clear.php)
+DEFINE('BASEDIR',       $_SERVER['DOCUMENT_ROOT']);
 DEFINE('BASEURL',       'http' . (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? 's' : '') . '://' . $_SERVER['HTTP_HOST']);
 DEFINE('RELURL',        lcut(CURDIR, BASEDIR));
 DEFINE('NOTSET',        '(^_^)[o_o](^.^)(".")($.$)');    // faces
