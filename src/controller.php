@@ -6,7 +6,7 @@ require 'nav.pht';
 ?>
 
 <div class="container my-4">
-	<h1><?= $hello ?> <?= $where ?> from controller.php</h1>
+	<h1><?= $greeting ?> <?= $who ?> from controller.php</h1>
 </div>
 
 <?

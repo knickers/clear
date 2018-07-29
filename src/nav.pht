@@ -2,14 +2,14 @@
 function navLink($url, $text) {
 	$a = $url === $_SERVER['SCRIPT_NAME'] ? ' active' : '';
 ?>
-	<a href="<?= $url ?>" class="nav-item nav-link h5 px-3 mb-0 <?= $a ?>">
+	<a href="<?= $url ?>" class="nav-item nav-link <?= $a ?>">
 		<?= $text ?>
 		<? if ($a): ?><span class="sr-only"> (current)</span><? endif ?>
 	</a>
 <?
 }
 
-function toggleGet($arg, $value='') {
+function toggleGET($arg, $value='') {
 	$get = $_GET;
 
 	if (isset($get[$arg])) {
@@ -20,6 +20,20 @@ function toggleGet($arg, $value='') {
 	}
 
 	return empty($get) ? $_SERVER['SCRIPT_NAME'] : '?'.http_build_query($get);
+}
+
+function devToggler($arg, $label, $title) {
+?>
+	<a href="<?= toggleGET($arg) ?>"
+		class="dropdown-item"
+		title="<?= $title ?>"
+	>
+		<input type="checkbox" class="p-rel" style="top:1px;"
+			<?= isset($_GET[$arg]) ? 'checked' : '' ?>
+		>
+		<?= $label ?>
+	</a>
+<?
 }
 ?>
 
@@ -58,58 +72,18 @@ function toggleGet($arg, $value='') {
 					aria-haspopup="true"
 					aria-expanded="false"
 				>
-					<span class="d-md-none d-lg-inline">Hello,</span>
+					<span class="d-lg-none d-xl-inline">Hello,</span>
 					PHP Developer
 				</a>
-				<div class="dropdown-menu" aria-labelledby="user-dropdown">
-					<a class="dropdown-item" href="/settings">Settings</a>
+				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="user-dropdown">
+					<a class="dropdown-item" href="/account.php">Account</a>
 					<div class="dropdown-divider"></div>
-					<h6 class="dropdown-header text-7">DEBUG HELPERS</h6>
-					<a href="<?= toggleGet('globs') ?>"
-						class="dropdown-item"
-						title="Display Clear PHP Global Variables"
-					>
-						<input type="checkbox" class="p-rel" style="top:1px;"
-							<?= isset($_GET['globs']) ? 'checked' : '' ?>
-						>
-						Global Variables
-					</a>
-					<a href="<?= toggleGet('vars') ?>"
-						class="dropdown-item"
-						title="Display Local Template Variables"
-					>
-						<input type="checkbox" class="p-rel" style="top:1px;"
-							<?= isset($_GET['vars']) ? 'checked' : '' ?>
-						>
-						Local Variables
-					</a>
-					<a href="<?= toggleGet('rands') ?>"
-						class="dropdown-item"
-						title="Display A Random String"
-					>
-						<input type="checkbox" class="p-rel" style="top:1px;"
-							<?= isset($_GET['rands']) ? 'checked' : '' ?>
-						>
-						Random String
-					</a>
-					<a href="<?= toggleGet('ses') ?>"
-						class="dropdown-item"
-						title="Display The Session"
-					>
-						<input type="checkbox" class="p-rel" style="top:1px;"
-							<?= isset($_GET['ses']) ? 'checked' : '' ?>
-						>
-						Session
-					</a>
-					<a href="<?= toggleGet('viewport') ?>"
-						class="dropdown-item"
-						title="Display current viewport size (Bootstrap breakpoints)"
-					>
-						<input type="checkbox" class="p-rel" style="top:1px;"
-						<?= isset($_GET['viewport']) ? 'checked' : '' ?>
-						>
-						Viewport
-					</a>
+					<h6 class="dropdown-header text-7">DEVELOPER HELPERS</h6>
+					<? devToggler('globs', 'Global Variables', 'Display Clear PHP Global Variables') ?>
+					<? devToggler('vars', 'Local Variables', 'Display Local Template Variables') ?>
+					<? devToggler('rands', 'Random String', 'Generate a Random String') ?>
+					<? devToggler('ses', 'Session', 'Display the User Session') ?>
+					<? devToggler('viewport', 'Viewport', 'Display current viewport size (Bootstrap breakpoints)') ?>
 					<div class="dropdown-divider"></div>
 					<a class="dropdown-item" href="/logout">Logout</a>
 				</div>

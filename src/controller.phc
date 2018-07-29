@@ -1,4 +1,4 @@
 <?php
 $pagename = 'Controller';
-$hello = 'Hello';
-$where = empty($_GET['where']) ? '' : $_GET['where'];
+$greeting = 'Hello';
+$who = $_GET['who'] ?? '';
