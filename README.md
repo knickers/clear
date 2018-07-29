@@ -42,7 +42,7 @@ Create a normal `.php` file, web servers will execute the code and serve up the 
 
 Make sure 'short open tags' are enabled in `php.ini`. This makes php templating so nice!
 
-```phtml
+```php
 <!-- Execute a php statement -->
 <? $var = 42 ?>
 
@@ -51,7 +51,7 @@ Make sure 'short open tags' are enabled in `php.ini`. This makes php templating 
 ```
 
 `index.php`
-```phtml
+```php
 <?
 $pagename = 'Home';
 include 'header.pht';
@@ -59,24 +59,24 @@ include 'navigation.pht';
 ?>
 
 <div id="page>
-	...
+    ...
 ```
 
 `header.pht`
-```phtml
+```php
 <!DOCTYPE html>
-<html
-	<head>
-		<title><?= isset($pagename) ? $pagename.' |' : '' ?> Website</title>
-	</head>
-	<body>
-	...
+<html>
+    <head>
+        <title><?= isset($pagename) ? $pagename.' |' : '' ?> Website</title>
+    </head>
+    <body>
+    ...
 ```
 
 ## Controller
 
 `index.php`
-```phtml
+```php
 <?
 include 'index.phc';
 include 'header.pht';
@@ -84,24 +84,22 @@ include 'navigation.pht';
 ?>
 
 <div id="page>
-	...
+    ...
 ```
 
 `index.phc`
-```phtml
+```php
 <?php
 $pagename = 'Home';
 
-/*
- * If a controller is only used when a form is posted,
+/* If a controller is only used when a form is posted,
  * then simply return back to the parent file when not needed.
  */
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-	return;
+    return;
 }
 
-/**
- * Validate post variables.
+/* Validate post variables.
  * Created message and error variables will be accessible to the calling file.
  * Return at any time to calling file.
  * Perform DB queries.
