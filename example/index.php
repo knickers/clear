@@ -1,5 +1,4 @@
 <?
-require_once 'clear.php';
 require 'header.pht';
 require 'nav.pht';
 ?>
