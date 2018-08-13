@@ -1,6 +1,6 @@
 # Clear
 
-### A PHP programming paradigm *anti*-framework
+### A PHP *anti*-framework programming paradigm
 
 Clear is a collection of functions and design philosophy for building web applications.
 
