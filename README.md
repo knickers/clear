@@ -58,7 +58,7 @@ include 'header.pht';
 include 'navigation.pht';
 ?>
 
-<div id="page>
+<div id="page">
     ...
 ```
 
@@ -67,7 +67,7 @@ include 'navigation.pht';
 <!DOCTYPE html>
 <html>
     <head>
-        <title><?= isset($pagename) ? $pagename.' |' : '' ?> Website</title>
+        <title><?= isset($pagename) ? "$pagename |" : '' ?> Website</title>
     </head>
     <body>
     ...
