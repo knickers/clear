@@ -83,7 +83,7 @@ include 'header.pht';
 include 'navigation.pht';
 ?>
 
-<div id="page>
+<div id="page">
     ...
 ```
 
@@ -99,12 +99,13 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     return;
 }
 
-/* Validate post variables.
- * Created message and error variables will be accessible to the calling file.
- * Return at any time to calling file.
- * Perform DB queries.
- * Redirect if all was successful.
- * BE SURE TO CALL die(); AFTER REDIRECTING!
+/* Things to do in controllers:
+ *  - Validate post variables
+ *  - Create message and error variables to be used in the calling file
+ *  - Return at any time to calling file
+ *  - Perform DB queries
+ *  - Redirect if all was successful
+ *    BE SURE TO CALL die(); AFTER REDIRECTING!
  */
 header("Location: https://example.com/", true, 303);
 die();
