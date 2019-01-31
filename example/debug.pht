@@ -10,6 +10,11 @@
 <div class="container-fluid">
 	<? if (isset($_GET['globs'])): ?>
 		<h3 class="mt-2">Global Variables</h3>
+		<? if (empty($_GET['globs'])): ?>
+			<pre class="mt-2"><?= export(get_defined_constants()) ?></pre>
+		<? else: ?>
+			<pre class="mt-2"><?= $_GET['globs'] ?> = <?= export([$_GET['globs']]) ?></pre>
+		<? endif ?>
 		<pre>
 CURFILE : <?= CURFILE ?>
 
@@ -45,7 +50,9 @@ RELURL  : <?= RELURL ?>
 			Local Variable<?= empty($_GET['vars']) ? 's' : '' ?>
 		</h3>
 		<? if (empty($_GET['vars'])): ?>
-			<pre><?= export(get_defined_vars()) ?></pre>
+		<pre><?= export(array_filter(get_defined_vars(), function($key) {
+			return $key[0] != '_';
+		}, ARRAY_FILTER_USE_KEY)) ?></pre>
 		<? else: ?>
 			<? $var = $_GET['vars'] ?>
 			<pre>$<?= $_GET['vars'] ?> = <?= export($$var) ?></pre>
