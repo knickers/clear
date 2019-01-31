@@ -46,7 +46,7 @@ function randomString($len=30) {
 }
 
 /**
- * @param  $URL  string  relative URL, '/' = home
+ * @param  $URL  string  relative URL, '/' = index (home)
  * @param  $code int     HTML status code
  *               301     Moved permanently
  *               302     Found
@@ -63,22 +63,22 @@ function redirect($URL, $code=303) {
 function array_extract($input, $extract) {
 	$return = [];
 	foreach($extract as $key => $val) {
-		if ($val === NOTSET) {
+		if ($val === NOTSET) { // Allowed to be unset and empty string
 			if (!isset($input[$key]) || $input[$key] === '') {
 				continue;
 			}
 		}
-		else if ($val === OPTIONAL) {
+		else if ($val === OPTIONAL) { // Allowed to be unset, but not empty
 			if (!isset($input[$key])) {
 				continue;
 			}
 		}
-		else if ($val === REQUIRED) {
+		else if ($val === REQUIRED) { // Must be set and not empty string
 			if (!isset($input[$key]) || $input[$key] === '') {
 				throw new Exception("Required value '$key' not provided");
 			}
 		}
-		else if ($val === ALLOWED_EMPTY) {
+		else if ($val === ALLOWED_EMPTY) { // Must be set, allowed to be empty
 			if (!isset($input[$key])) {
 				throw new Exception("Required value '$key' not provided");
 			}
@@ -93,17 +93,17 @@ function array_extract($input, $extract) {
 /**
  * A prettier var_export(). Always returns a string, never printing the result.
  *
- * var_export()           export()
- *
- * array (                array (
- *   '_GET' =>                '_GET' => array (
- *   array (                      'id' => '12',
- *     'id' => '12',          ),
- *   ),                       '_POST' => array(),
- *   '_POST' =>           ),
- *   array (
- *   ),
- * ),
+ * var_export()       | export()
+ * -------------------+------------------------
+ * array (            | array (
+ *   '_GET' =>        |     '_GET' => array (
+ *   array (          |         'id' => '12',
+ *     'id' => '12',  |     ),
+ *   ),               |     '_POST' => array(),
+ *   '_POST' =>       | ),
+ *   array (          |
+ *   ),               |
+ * ),                 |
  */
 function export($var) {
 	$str = var_export($var, true);
