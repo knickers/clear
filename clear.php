@@ -29,20 +29,20 @@ DEFINE('REQUIRED',      '_.~"(_.~"(_.~"(_.~"(_.~"(_');   // breaking waves
 DEFINE('ALLOWED_EMPTY', '_,-*"`-._,-*"`-._,-*"`-._');    // rolling waves
 DEFINE('CSRFSECRET',    'zA-2Q0eIUgLSlrAcDM_1-a1oF_Q7FFCK');
 
-function randomString($len=30) {
-	$fp = @fopen('/dev/urandom','rb');
-	$str = '';
-	if ($fp !== FALSE) {
-		$str .= @fread($fp, $len);
-		@fclose($fp);
-	} else {
-		trigger_error('Can not open /dev/urandom.');
+function rands($len=30) {
+	$fp = @fopen('/dev/urandom', 'rb');
+
+	if ($fp === false) {
+		trigger_error('Can not open /dev/urandom.', E_USER_ERROR);
+		return;
 	}
-	$str = base64_encode($str);        // convert from binary to string
-	$str = strtr($str, '+/', '-_');    // remove non-url chars
-	$str = str_replace('=', '', $str); // Remove = from the end
-	
-	return substr($str, 0, $len);
+
+	$str = base64_encode(@fread($fp, $len)); // convert from binary to string
+	$str = strtr($str, '+/', '-_');          // remove non-url chars
+
+	@fclose($fp);
+
+	return substr($str, 0, $len);            // trim to length
 }
 
 /**

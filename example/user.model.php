@@ -23,7 +23,7 @@ class UserModel extends ClearModel {
 	}
 	
 	public static function generateAuth(&$user) {
-		$token = Clear::randomString();
+		$token = rands();
 		$days = 7; // TODO CONFIG days
 		
 		$user->auth_token = hash('sha256', $token);

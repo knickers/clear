@@ -25,7 +25,7 @@ RELURL  : <?= RELURL ?>
 
 	<? if (isset($_GET['rands'])): ?>
 		<? $len = empty($_GET['rands']) ? 30 : $_GET['rands'] ?>
-		<? $str = randomString($len) ?>
+		<? $str = rands($len) ?>
 		<h3 class="mt-2">Random String
 			<small><small>(length = <?= strlen($str) ?>)</small></small>
 		</h3>
