@@ -21,7 +21,10 @@ DEFINE('CURFILE',       basename($_SERVER['PHP_SELF']));
 DEFINE('CURFILENAME',   basename($_SERVER['PHP_SELF'], '.php'));
 DEFINE('CURDIR',        getcwd()); // Current Working Directory
 DEFINE('BASEDIR',       $_SERVER['DOCUMENT_ROOT']);
-DEFINE('BASEURL',       'http' . (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? 's' : '') . '://' . $_SERVER['HTTP_HOST']);
+DEFINE('BASEURL',       sprintf('http%s://%s',
+	isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? 's' : '',
+	$_SERVER['HTTP_HOST'] ?? 'localhost'
+));
 DEFINE('RELURL',        lcut(CURDIR, BASEDIR));
 DEFINE('NOTSET',        '(^_^)[o_o](^.^)(".")($.$)');    // faces
 DEFINE('OPTIONAL',      '</////|====================-'); // foil, fencing sword
