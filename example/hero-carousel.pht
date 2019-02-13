@@ -1,0 +1,47 @@
+<?
+if (empty($imageDirectory)) {
+	error_log('Please set $imageDirectory when calling hero-carousel.');
+	return;
+}
+if (!file_exists($imageDirectory)) {
+	error_log('hero-carousel $imageDirectory is invalid: '.export($imageDirectory));
+	return;
+}
+$files = scandir($imageDirectory);
+if (empty($files)) {
+	return;
+}
+$files = array_values(array_diff($files, ['.', '..']));
+$class = str_replace('/', '-', $imageDirectory);
+?>
+<div id="hero-<?= $class ?>-carousel"
+	class="carousel slide"
+	data-ride="carousel"
+>
+	<div class="carousel-inner">
+		<? foreach($files as $i => $file): ?>
+			<div class="carousel-item <?= $i ? '' : 'active' ?>">
+				<img class="d-block w-100"
+					src="/<?= $imageDirectory ?>/<?= $file ?>"
+					alt="<?= $file ?>"
+				>
+			</div>
+		<? endforeach ?>
+	</div>
+	<a class="carousel-control-prev"
+		href="#hero-<?= $class ?>-carousel"
+		role="button"
+		data-slide="prev"
+	>
+		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		<span class="sr-only">Previous</span>
+	</a>
+	<a class="carousel-control-next"
+		href="#hero-<?= $class ?>-carousel"
+		role="button"
+		data-slide="next"
+	>
+		<span class="carousel-control-next-icon" aria-hidden="true"></span>
+		<span class="sr-only">Next</span>
+	</a>
+</div>
