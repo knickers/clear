@@ -1,0 +1,22 @@
+<?
+if (empty($codeFilename)) {
+	trigger_error('Please set $codeFilename when calling code-block');
+	return;
+}
+
+$fd = fopen($codeFilename, 'r');
+
+if (!$fd) {
+	trigger_error("error opening $codeFilename for code-block");
+	return;
+}
+
+echo '<pre class="line-numbers bg-light">';
+
+while (($line = fgets($fd)) !== false) {
+	echo '<code>'.htmlspecialchars($line, ENT_QUOTES).'</code>';
+}
+
+echo '</pre>';
+
+fclose($fd);

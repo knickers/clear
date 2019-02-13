@@ -58,6 +58,7 @@ function devToggler($arg, $label, $title) {
 			<? navLink('/index.php', 'Home') ?>
 			<? navLink('/controller.php', 'Controller') ?>
 			<? navLink('/todo/index.php', 'To Do') ?>
+			<? navLink('/code.php', 'Code') ?>
 			<? navLink('/products/kittens.php', 'Kittens') ?>
 			<? navLink('/products/puppies.php', 'Puppies') ?>
 			<? navLink('/contact.php', 'Contact Us') ?>

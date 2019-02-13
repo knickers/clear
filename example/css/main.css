@@ -8,3 +8,19 @@ body {
 footer {
 	bottom: 0;
 }
+
+pre.line-numbers {
+	padding: 0.2rem;
+	counter-reset: line;
+}
+pre.line-numbers > code:before {
+	width: 2.5rem;
+	display: inline-block;
+	text-align: right;
+	border-right: 1px solid #ccc;
+	margin-right: 0.5rem;
+	padding-right: 0.5rem;
+	counter-increment: line;
+	content: counter(line);
+	-webkit-user-select: none;
+}
