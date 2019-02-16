@@ -74,7 +74,7 @@ function devToggler($arg, $label, $title) {
 					aria-expanded="false"
 				>
 					<span class="d-lg-none d-xl-inline">Hello,</span>
-					PHP Developer
+					User
 				</a>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="user-dropdown">
 					<a class="dropdown-item" href="/account.php">Account</a>

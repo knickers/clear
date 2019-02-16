@@ -6,7 +6,7 @@ include BASEDIR.'/nav.pht';
 ?>
 
 <div class="container mt-4">
-	<h1>Contact MedEquip</h1>
+	<h1>Contact Us</h1>
 
 	<div class="row">
 		<div class="col-md-6 mt-4">
