@@ -11,10 +11,11 @@ if (!$fd) {
 	return;
 }
 
-echo '<pre class="line-numbers bg-light">';
+echo '<pre class="line-numbers bg-light tab-4">';
 
 while (($line = fgets($fd)) !== false) {
-	echo '<code>'.htmlspecialchars($line, ENT_QUOTES).'</code>';
+	$line = rtrim($line);
+	echo '<code>'.htmlspecialchars($line, ENT_QUOTES).'</code>'.PHP_EOL;
 }
 
 echo '</pre>';
