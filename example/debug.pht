@@ -11,7 +11,7 @@
 	<? if (isset($_GET['globs'])): ?>
 		<h3 class="mt-2">Global Variables</h3>
 		<? if (empty($_GET['globs'])): ?>
-			<pre class="mt-2"><?= export(get_defined_constants()) ?></pre>
+			<pre class="mt-2"><?//= export(get_defined_constants()) ?></pre>
 		<? else: ?>
 			<pre class="mt-2"><?= $_GET['globs'] ?> = <?= export([$_GET['globs']]) ?></pre>
 		<? endif ?>
