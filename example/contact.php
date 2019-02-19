@@ -1,8 +1,8 @@
 <?
 require_once 'clear.php';
-include BASEDIR.'/contact.phc';
-include BASEDIR.'/header.pht';
-include BASEDIR.'/nav.pht';
+require BASEDIR.'/contact.phc';
+require BASEDIR.'/header.pht';
+require BASEDIR.'/nav.pht';
 ?>
 
 <div class="container mt-4">
@@ -76,5 +76,5 @@ include BASEDIR.'/nav.pht';
 	</form>
 </div>
 
-<? include BASEDIR.'/footer.pht' ?>
-<? include BASEDIR.'/close.pht' ?>
+<? require BASEDIR.'/footer.pht' ?>
+<? require BASEDIR.'/close.pht' ?>
