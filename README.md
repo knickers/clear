@@ -10,9 +10,9 @@ Clear is a design philosophy for building web applications without the need for 
 2. PHP is already a templating language, stop using another one on top of it.
 3. Separating MVC responsibilities by using `include` statements.
 4. Adding a new page to a PHP website is as easy as creating ONE FILE.
-	* No need to define a route for the new page!
-	* No need to make a page controller!
-	* No need to run a script to initialize anything!
+	* No need to define a route for the new page
+	* No need to make a page controller
+	* No need to run an initialization script
 
 # Overview
 
