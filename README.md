@@ -108,7 +108,6 @@ Return back to the page from `index.phc`:
 ```php
 <?php
 $pagename = 'Home';
-$query = '';
 
 // Simply return back to the parent file when not needed.
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' || empty($_POST['url'])) {
