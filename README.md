@@ -48,7 +48,8 @@ Make sure 'short open tags' are enabled in `php.ini`. This makes php templating 
 <p>The answer is: <?= $var ?>!</p>
 ```
 
-`index.php`
+The variable `$pagename` is created in `index.php` ...
+
 ```php
 <?
 $pagename = 'Home';
@@ -56,24 +57,34 @@ include 'header.pht';
 include 'navigation.pht';
 ?>
 
-<div id="page">
-    ...
+<h1>Welcome</h1>
+
+<? include 'footer.pht' ?>
 ```
 
-`header.pht`
+... and is usable in `header.pht`:
+
 ```php
 <!DOCTYPE html>
 <html>
     <head>
-        <title><?= isset($pagename) ? "$pagename |" : '' ?> Website</title>
+        <title>
+            <?= isset($pagename) ? "$pagename |" : '' ?>
+            Website Name
+        </title>
     </head>
     <body>
-    ...
+```
+
+footer.pht:
+```php
+    </body>
+</html>
 ```
 
 ## Controller
 
-`index.php`
+index.php:
 ```php
 <?
 include 'index.phc';
@@ -81,30 +92,30 @@ include 'header.pht';
 include 'navigation.pht';
 ?>
 
-<div id="page">
-    ...
+<h2>Save your favorite links</h2>
+
+<form method="POST">
+    <input type="text" name="url">
+    <button type="submit">Save</button>
+</form>
+
+<? include 'footer.pht' ?>
 ```
 
-`index.phc`
+index.phc:
 ```php
 <?php
 $pagename = 'Home';
+$query = '';
 
-/* If a controller is only used when a form is posted,
- * then simply return back to the parent file when not needed.
- */
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+// Simply return back to the parent file when not needed.
+if ($_SERVER['REQUEST_METHOD'] !== 'POST' || empty($_POST['url'])) {
     return;
 }
 
-/* Things to do in controllers:
- *  - Validate post variables
- *  - Create message and error variables to be used in the calling file
- *  - Return at any time to calling file
- *  - Perform DB queries
- *  - Redirect if all was successful
- *    BE SURE TO CALL die(); AFTER REDIRECTING!
- */
+// Insert $_POST['url'] into the database
+
+// Redirect if all was successful
 header("Location: https://example.com/", true, 303);
 die();
 ```
