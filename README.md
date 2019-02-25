@@ -84,7 +84,8 @@ footer.pht:
 
 ## Controller
 
-index.php:
+Include the controller as the first thing in `index.php`:
+
 ```php
 <?
 include 'index.phc';
@@ -102,7 +103,8 @@ include 'navigation.pht';
 <? include 'footer.pht' ?>
 ```
 
-index.phc:
+Return back to the page from `index.phc`:
+
 ```php
 <?php
 $pagename = 'Home';
