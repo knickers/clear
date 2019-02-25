@@ -1,3 +1,4 @@
+<? require 'compile.phm' ?>
 <!doctype html>
 <html lang="en">
 	<head>

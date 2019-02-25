@@ -85,6 +85,7 @@ function devToggler($arg, $label, $title) {
 					<? devToggler('rands', 'Random String', 'Generate a Random String') ?>
 					<? devToggler('ses', 'Session', 'Display the User Session') ?>
 					<? devToggler('viewport', 'Viewport', 'Display current viewport size (Bootstrap breakpoints)') ?>
+					<? devToggler('compile', 'Compile', 'Compile this page into a static file') ?>
 					<div class="dropdown-divider"></div>
 					<a class="dropdown-item" href="/logout">Logout</a>
 				</div>

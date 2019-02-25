@@ -1,0 +1,14 @@
+<?
+if (!defined('COMPILING')) {
+	define('COMPILING', isset($_REQUEST['compile']));
+	if (!COMPILING) {
+		return;
+	}
+	ob_start();
+}
+else if (COMPILING) {
+	require_once 'clear.php';
+
+	$bytes = file_put_contents(CURDIR.'/'.CURFILENAME.'.html', ob_get_clean());
+	redirect(RELURL.'/'.CURFILE);
+}
