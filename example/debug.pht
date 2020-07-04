@@ -1,3 +1,4 @@
+<? require_once 'clear.php' ?>
 <? if (isset($_GET['viewport'])): ?>
 	<h3 class="pl-1" style="position:sticky; margin-bottom:-30px; top:3px; z-index:10;">
 		<span class="          d-inline d-sm-none">xs</span>
@@ -29,7 +30,7 @@ RELURL  : <?= RELURL ?>
 	<? endif ?>
 
 	<? if (isset($_GET['rands'])): ?>
-		<? $len = empty($_GET['rands']) ? 30 : $_GET['rands'] ?>
+		<? $len = empty($_GET['rands']) ? 32 : $_GET['rands'] ?>
 		<? $str = rands($len) ?>
 		<h3 class="mt-2">Random String
 			<small><small>(length = <?= strlen($str) ?>)</small></small>
@@ -37,7 +38,7 @@ RELURL  : <?= RELURL ?>
 		<pre><?= $str ?></pre>
 	<? endif ?>
 
-	<? if (isset($_GET['ses'])): ?>
+	<? if (isset($_GET['ses']) && isset($_SESSION)): ?>
 		<? if (empty($_GET['ses'])): ?>
 			<pre class="mt-2">$_SESSION = <?= export($_SESSION) ?></pre>
 		<? else: ?>
