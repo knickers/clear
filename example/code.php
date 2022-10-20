@@ -7,11 +7,11 @@ require 'nav.pht';
 <div class="container my-4">
 	<div class="row">
 		<div class="col-md-6">
-			<div>controller.php</div>
+			<div>Page: <code>contact.php</code></div>
 			<? $codeFilename = 'contact.php'; require 'code-block.pht' ?>
 		</div>
 		<div class="col-md-6">
-			<div>controller.phc</div>
+			<div>Controller: <code>contact.phc</code></div>
 			<? $codeFilename = 'contact.phc'; require 'code-block.pht' ?>
 		</div>
 	</div>
